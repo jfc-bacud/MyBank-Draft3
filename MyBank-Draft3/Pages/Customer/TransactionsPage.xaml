@@ -89,14 +89,14 @@
 
                 <materialDesign:Card Background="#131a22" Grid.Row="1" Grid.Column="0" UniformCornerRadius="8" Width="500" Height="500" VerticalAlignment="Center">
                     <StackPanel>
-                        <ListView x:Name="ListViewData" BorderThickness="0">
+                        <ListView x:Name="ListViewData" ItemsSource="{Binding _recordedTransactions}" BorderThickness="0">
                             <ListView.View>
                                 <GridView>
                                     
                                     <GridViewColumn Header="Transaction" Width="200">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Category_Type}"/>
+                                                <TextBlock Text="{Binding Transact}"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -104,7 +104,7 @@
                                     <GridViewColumn Header="Date" Width="100">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Transaction_Date, StringFormat='MMM-dd-yy'}"/>
+                                                <TextBlock Text="{Binding Date, StringFormat='MMM-dd-yy'}"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -120,7 +120,7 @@
                                     <GridViewColumn Header="Type" Width="100">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Transaction_Desc}"/>
+                                                <TextBlock Text="{Binding Type}"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>

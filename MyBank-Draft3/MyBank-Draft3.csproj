@@ -124,6 +124,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MyBankDataClass.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\TransactionListView.cs" />
     <Compile Include="Pages\Customer\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
