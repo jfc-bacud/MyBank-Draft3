@@ -170,12 +170,14 @@ namespace MyBank_Draft3.Pages.Customer
 
                     if (validTransaction)
                     {
+                        MessageBox.Show("Transaction edited successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
                         SubmitChanges();
                         ClearTrigger();
                     }
                     else
                     {
-                        MessageBox.Show("nigga you broke");
+                        ThrowError(1);
                     }
                 }
                 
@@ -212,10 +214,53 @@ namespace MyBank_Draft3.Pages.Customer
 
                     if (validTransaction)
                     {
+                        MessageBox.Show("Transaction added successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                         _localdb.db.Transactions.InsertOnSubmit(_newTransaction);
                         SubmitChanges();
                     }
+                    else
+                    {
+                        ThrowError(1);
+                    }
                 }
+            }
+        }
+
+        private void ThrowError(int error)
+        {
+            switch(error)
+            {
+                case 1:
+                    MessageBox.Show("Transaction cannot be done due to insufficient funds!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    break;
+
+                case 2:
+                    MessageBox.Show("Name field cannot be empty!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    NameTB.Focus();
+                    break;
+
+                case 3:
+                    MessageBox.Show("Category field cannot be empty!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    categoryCB.Focus();
+                    break;
+
+                case 4:
+                    MessageBox.Show("Date field cannot be empty!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    datePicker.Focus();
+                    break;
+
+                case 5:
+                    MessageBox.Show("Date is in the wrong format!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    datePicker.Focus();
+                    break;
+
+                case 6:
+                    MessageBox.Show("Amount field is in the wrong format!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    datePicker.Focus();
+                    break;
+
+                case 7:
+
             }
         }
 
@@ -234,19 +279,47 @@ namespace MyBank_Draft3.Pages.Customer
 
         private bool FieldVerify() // FOR ERROR HANDLING LATER
         {
-            if (categoryCB.SelectedItem != null)
+            if (NameTB.Text == null)
             {
-                if (datePicker.SelectedDate.Value != null)
-                {
-                    if (VerifyAmount())
-                    {
-                        return true;
-                    }
-                    return false;
-                }
+                ThrowError(2);
+                return false;
+
+            }
+
+            if (categoryCB.SelectedItem == null)
+            {
+                ThrowError(3);
                 return false;
             }
-            return false;
+
+            if (datePicker.SelectedDate.Value == null)
+            {
+                ThrowError(4);
+                return false;
+            }
+            else
+            {
+                if (!DateTime.TryParseExact(datePicker.SelectedDate.Value.ToString(), "dd/MM/yyyy", null, DateTimeStyles.None, out DateTime result))
+                {
+                    ThrowError(5);
+                    return false;
+                }
+            }
+
+            if (AmountTB.Text == null)
+            {
+                ThrowError(6);
+            }
+            else
+            {
+                if (!decimal.TryParse(AmountTB.Text, out decimal result))
+                {
+                    ThrowError(7);
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private bool VerifyAmount()

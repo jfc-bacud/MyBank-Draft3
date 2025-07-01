@@ -3,12 +3,115 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:MyBank_Draft3.Pages.Admin"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="700" d:DesignWidth="1000"
       Title="SettingsStaff">
+    <Border CornerRadius="0 20 20 0" Background="#12171d" BorderBrush="Black" >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="600"/>
+            </Grid.ColumnDefinitions>
 
-    <Grid>
-        
-    </Grid>
+            <StackPanel Grid.Row="1" Grid.Column="0" Margin="0 10 0 0">
+                <WrapPanel Margin="50 0 50 0" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <materialDesign:PackIcon Kind="People" VerticalAlignment="Center" Height="50" Width="50" Foreground="White"/>
+                    <WrapPanel Orientation="Vertical">
+                        <TextBlock x:Name="userTB" Text="placeholder" Foreground="White" FontSize="20" FontWeight="Medium" FontFamily="Inter" Margin="13 0 0 0"/>
+                        <TextBlock Text="Your Personal Account" Foreground="Gray" FontSize="15" FontWeight="Medium" FontFamily="Inter" Margin="10 0 0 0"/>
+                    </WrapPanel>
+
+                </WrapPanel>
+
+                <Button x:Name="AccountBTN" materialDesign:ButtonAssist.CornerRadius="6" Width="250" Height="35" Background="White" BorderBrush="White" Margin="0 25 0 0" Click="AccountBTN_Click">
+                    <WrapPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon x:Name="AccountIcon" Kind="People" VerticalAlignment="Center" Margin="0 0 5 0" Foreground="Black">
+                        </materialDesign:PackIcon>
+                        <TextBlock x:Name="AccountTB" Foreground="Black">Account</TextBlock>
+                    </WrapPanel>
+                </Button>
+            </StackPanel>
+
+            <StackPanel x:Name="AccountView" Grid.Column="1" Grid.Row="1" Margin="25" Visibility="Visible">
+                <TextBlock Text="Profile" Foreground="White" FontSize="30" FontWeight="Medium" FontFamily="Inter" Margin="0 0 0 0"/>
+                <WrapPanel Orientation="Horizontal" Margin="0 8 0 0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Border BorderThickness="0 0.5 0 0" BorderBrush="LightGray" Width="550" HorizontalAlignment="Center"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Vertical">
+                    <TextBlock Text="First Name" Foreground="White" FontSize="20" FontWeight="Medium" FontFamily="Inter" Margin="0 20 0 5"/>
+                    <Border CornerRadius="3" BorderThickness="0.5" Background="White" BorderBrush="Black" Height="32" Width="550">
+                        <TextBox x:Name="FirstTB" materialDesign:HintAssist.Background="Transparent"  materialDesign:HintAssist.Hint="Provide a Short Description (Max. 10 Characters)"
+                     materialDesign:HintAssist.Foreground="Black" 
+                     materialDesign:TextFieldAssist.DecorationVisibility="Hidden" CaretBrush="Green"
+                     TextWrapping="Wrap" Foreground="Black" 
+                     HorizontalAlignment="Center" VerticalContentAlignment="Top" Width="540" Height="32" MaxLines="10"/>
+                    </Border>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Vertical">
+                    <TextBlock Text="Last Name" Foreground="White" FontSize="20" FontWeight="Medium" FontFamily="Inter" Margin="0 25 0 5"/>
+                    <Border CornerRadius="3" BorderThickness="0.5" Background="White" BorderBrush="Black" Height="32" Width="550">
+                        <TextBox x:Name="LastTB" materialDesign:HintAssist.Background="Transparent"  materialDesign:HintAssist.Hint="Cena (Max. 10 Characters)"
+                     materialDesign:HintAssist.Foreground="Black" 
+                     materialDesign:TextFieldAssist.DecorationVisibility="Hidden" CaretBrush="Green"
+                     TextWrapping="Wrap" Foreground="Black" 
+                     HorizontalAlignment="Center" VerticalContentAlignment="Top" Width="540" Height="32" MaxLines="10"/>
+                    </Border>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Vertical">
+                    <TextBlock Text="Email" Foreground="White" FontSize="20" FontWeight="Medium" FontFamily="Inter" Margin="0 25 0 5"/>
+                    <Border CornerRadius="3" BorderThickness="0.5" Background="White" BorderBrush="Black" Height="32" Width="550">
+                        <TextBox x:Name="EmailTB" materialDesign:HintAssist.Background="Transparent"  materialDesign:HintAssist.Hint="sample@gmail.com"
+                     materialDesign:HintAssist.Foreground="Black" 
+                     materialDesign:TextFieldAssist.DecorationVisibility="Hidden" CaretBrush="Green"
+                     TextWrapping="Wrap" Foreground="Black" 
+                     HorizontalAlignment="Center" VerticalContentAlignment="Top" Width="540" Height="32" MaxLines="10"/>
+                    </Border>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Vertical">
+                    <TextBlock Text="Password" Foreground="White" FontSize="20" FontWeight="Medium" FontFamily="Inter" Margin="0 25 0 5"/>
+                    <Border CornerRadius="3" BorderThickness="0.5" Background="White" BorderBrush="Black" Height="32" Width="550">
+                        <TextBox x:Name="PasswordTB" materialDesign:HintAssist.Background="Transparent"  materialDesign:HintAssist.Hint="Password"
+                     materialDesign:HintAssist.Foreground="Black" 
+                     materialDesign:TextFieldAssist.DecorationVisibility="Hidden" CaretBrush="Green"
+                     TextWrapping="Wrap" Foreground="Black" 
+                     HorizontalAlignment="Center" VerticalContentAlignment="Top" Width="540" Height="32" MaxLines="10"/>
+                    </Border>
+                </WrapPanel>
+
+                <StackPanel Margin="0 100 0 0" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="EditBTN" materialDesign:ButtonAssist.CornerRadius="6" materialDesign:ElevationAssist.Elevation="Dp0" Width="150" Height="40" Background="#4A90E2" BorderBrush="#4A90E2" Margin="0 0 20 0" Click="EditBTN_Click">
+                        <WrapPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="AccountEdit" VerticalAlignment="Center" Margin="0 0 5 0" Foreground="White">
+                                <materialDesign:PackIcon.Effect>
+                                    <DropShadowEffect ShadowDepth="0" Direction="0" Color="White" Opacity="0.6" BlurRadius="3"/>
+                                </materialDesign:PackIcon.Effect>
+                            </materialDesign:PackIcon>
+                            <TextBlock x:Name="addButtonTB" Foreground="White">Edit</TextBlock>
+                        </WrapPanel>
+                    </Button>
+
+                    <Button x:Name="DeleteBTN" materialDesign:ButtonAssist.CornerRadius="6" materialDesign:ElevationAssist.Elevation="Dp0" Width="150" Height="40" Background="DarkRed" BorderBrush="DarkRed" IsEnabled="False" Click="DeleteBTN_Click">
+                        <WrapPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Trash" VerticalAlignment="Center" Margin="0 0 5 0" Foreground="White">
+                                <materialDesign:PackIcon.Effect>
+                                    <DropShadowEffect ShadowDepth="0" Direction="0" Color="White" Opacity="0.6" BlurRadius="3"/>
+                                </materialDesign:PackIcon.Effect>
+                            </materialDesign:PackIcon>
+                            <TextBlock Foreground="White">Delete</TextBlock>
+                        </WrapPanel>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Page>

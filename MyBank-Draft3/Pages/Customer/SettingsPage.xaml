@@ -23,36 +23,33 @@
                 <WrapPanel Margin="50 0 50 0" Orientation="Horizontal" HorizontalAlignment="Center">
                     <materialDesign:PackIcon Kind="People" VerticalAlignment="Center" Height="50" Width="50" Foreground="White"/>
                     <WrapPanel Orientation="Vertical">
-                        <TextBlock x:Name="userTB" Text="johncena@gmail.com" Foreground="White" FontSize="20" FontWeight="Medium" FontFamily="Inter" Margin="13 0 0 0"/>
+                        <TextBlock x:Name="userTB" Text="placeholder" Foreground="White" FontSize="20" FontWeight="Medium" FontFamily="Inter" Margin="13 0 0 0"/>
                         <TextBlock Text="Your Personal Account" Foreground="Gray" FontSize="15" FontWeight="Medium" FontFamily="Inter" Margin="10 0 0 0"/>
                     </WrapPanel>
                     
                 </WrapPanel>
 
-                <Button x:Name="AccountBTN" materialDesign:ButtonAssist.CornerRadius="6" Width="250" Height="35" Background="#12171d" BorderBrush="White" Margin="0 25 0 0" Click="AccountBTN_Click">
+                <Button x:Name="AccountBTN" materialDesign:ButtonAssist.CornerRadius="6" Width="250" Height="35" Background="White" BorderBrush="White" Margin="0 25 0 0" Click="AccountBTN_Click">
                     <WrapPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="People" VerticalAlignment="Center" Margin="0 0 5 0" Foreground="White">
-                            <materialDesign:PackIcon.Effect>
-                                <DropShadowEffect ShadowDepth="0" Direction="0" Color="White" Opacity="0.6" BlurRadius="3"/>
-                            </materialDesign:PackIcon.Effect>
+                        <materialDesign:PackIcon x:Name="AccountIcon" Kind="People" VerticalAlignment="Center" Margin="0 0 5 0" Foreground="Black">
                         </materialDesign:PackIcon>
-                        <TextBlock x:Name="accountButtonTB" Foreground="White">Account</TextBlock>
+                        <TextBlock x:Name="AccountTB" Foreground="Black">Account</TextBlock>
                     </WrapPanel>
                 </Button>
 
                 <Button x:Name="GeneralBTN" materialDesign:ButtonAssist.CornerRadius="6" Width="250" Height="35" Background="#12171d" BorderBrush="White" Margin="0 25 0 0" Click="GeneralBTN_Click">
                     <WrapPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="People" VerticalAlignment="Center" Margin="0 0 5 0" Foreground="White">
+                        <materialDesign:PackIcon x:Name="GearIcon" Kind="Gear" VerticalAlignment="Center" Margin="0 1 5 0" Foreground="White">
                             <materialDesign:PackIcon.Effect>
                                 <DropShadowEffect ShadowDepth="0" Direction="0" Color="White" Opacity="0.6" BlurRadius="3"/>
                             </materialDesign:PackIcon.Effect>
                         </materialDesign:PackIcon>
-                        <TextBlock Foreground="White">General</TextBlock>
+                        <TextBlock x:Name="GeneralTB" Foreground="White">General</TextBlock>
                     </WrapPanel>
                 </Button>
             </StackPanel>
 
-            <StackPanel x:Name="AccountView" Grid.Column="1" Grid.Row="1" Margin="25" Visibility="Hidden">
+            <StackPanel x:Name="AccountView" Grid.Column="1" Grid.Row="1" Margin="25" Visibility="Visible">
                 <TextBlock Text="Profile" Foreground="White" FontSize="30" FontWeight="Medium" FontFamily="Inter" Margin="0 0 0 0"/>
                 <WrapPanel Orientation="Horizontal" Margin="0 8 0 0" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <Border BorderThickness="0 0.5 0 0" BorderBrush="LightGray" Width="550" HorizontalAlignment="Center"/>
@@ -103,7 +100,7 @@
                 </WrapPanel>
 
                 <StackPanel Margin="0 100 0 0" Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button x:Name="EditBTN" materialDesign:ButtonAssist.CornerRadius="6" materialDesign:ElevationAssist.Elevation="Dp0" Width="150" Height="40" Background="#4A90E2" BorderBrush="#4A90E2" Margin="0 0 20 0" Click="addTransactionBTN_Click">
+                    <Button x:Name="EditBTN" materialDesign:ButtonAssist.CornerRadius="6" materialDesign:ElevationAssist.Elevation="Dp0" Width="150" Height="40" Background="#4A90E2" BorderBrush="#4A90E2" Margin="0 0 20 0" Click="EditBTN_Click">
                         <WrapPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="AccountEdit" VerticalAlignment="Center" Margin="0 0 5 0" Foreground="White">
                                 <materialDesign:PackIcon.Effect>
@@ -114,7 +111,7 @@
                         </WrapPanel>
                     </Button>
 
-                    <Button x:Name="DeleteBTN" materialDesign:ButtonAssist.CornerRadius="6" materialDesign:ElevationAssist.Elevation="Dp0" Width="150" Height="40" Background="DarkRed" BorderBrush="DarkRed" IsEnabled="False" Click="deleteTransactionBTN_Click">
+                    <Button x:Name="DeleteBTN" materialDesign:ButtonAssist.CornerRadius="6" materialDesign:ElevationAssist.Elevation="Dp0" Width="150" Height="40" Background="DarkRed" BorderBrush="DarkRed" IsEnabled="False" Click="DeleteBTN_Click">
                         <WrapPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Trash" VerticalAlignment="Center" Margin="0 0 5 0" Foreground="White">
                                 <materialDesign:PackIcon.Effect>
@@ -127,7 +124,7 @@
                 </StackPanel>
             </StackPanel>
 
-            <StackPanel x:Name="GeneralView" Grid.Column="1" Grid.Row="1" Margin="25" Visibility="Visible">
+            <StackPanel x:Name="GeneralView" Grid.Column="1" Grid.Row="1" Margin="25" Visibility="Hidden">
                 <TextBlock Text="General" Foreground="White" FontSize="30" FontWeight="Medium" FontFamily="Inter" Margin="0 0 0 0"/>
                 <WrapPanel Orientation="Horizontal" Margin="0 8 0 0" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <Border BorderThickness="0 0.5 0 0" BorderBrush="LightGray" Width="550" HorizontalAlignment="Center"/>

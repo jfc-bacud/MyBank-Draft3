@@ -77,7 +77,6 @@ namespace MyBank_Draft3.Pages.Admin
                 var selectedUser = (dynamic)UsersListView.SelectedItem;
                 selectedUserId = selectedUser.UserID;
 
-                userIdTB.Text = selectedUser.UserID;
                 firstNameTB.Text = selectedUser.Name.Split(' ')[0];
                 lastNameTB.Text = selectedUser.Name.Split(' ')[1];
                 emailTB.Text = selectedUser.Email;
@@ -110,7 +109,6 @@ namespace MyBank_Draft3.Pages.Admin
             clearSelectionBTN.Opacity = 0;
 
             UsersListView.SelectedItem = null;
-            userIdTB.Text = "";
             firstNameTB.Text = "";
             lastNameTB.Text = "";
             emailTB.Text = "";

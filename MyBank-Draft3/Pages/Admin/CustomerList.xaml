@@ -99,7 +99,7 @@
             <!-- Right Panel Section -->
             <StackPanel Grid.Row="1" Grid.Column="1" Margin="0,0,10,10">
                 <!-- Total Users Card -->
-                <materialDesign:Card Background="#131a22" UniformCornerRadius="8" Width="370" Height="80" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,15">
+                <materialDesign:Card Background="#131a22" UniformCornerRadius="8" Width="370" Height="80" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,54,0,15">
                     <WrapPanel Orientation="Horizontal">
                         <Border Height="80" Width="90" HorizontalAlignment="Left" Background="#171f27" CornerRadius="8 0 0 8">
                             <materialDesign:PackIcon x:Name="UsersIcon" Kind="AccountGroup" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#4A90E2" Width="50" Height="50"/>
@@ -112,7 +112,7 @@
                 </materialDesign:Card>
 
                 <!-- User Details Card -->
-                <materialDesign:Card Background="#131a22" UniformCornerRadius="8" Width="370" Height="525" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <materialDesign:Card Background="#131a22" UniformCornerRadius="8" Width="370" Height="465.5" HorizontalAlignment="Left" VerticalAlignment="Top">
                     <StackPanel x:Name="userDetailsPanel" Margin="15,15,15,0">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="User Details" Foreground="White" FontSize="18" FontWeight="Medium" FontFamily="Inter" Margin="0,0,0,5" TextDecorations="Underline"/>
@@ -127,14 +127,6 @@
                                 </WrapPanel>
                             </Button>
                         </StackPanel>
-
-                        <TextBlock Text="User ID" Foreground="White" FontSize="14" FontWeight="Medium" FontFamily="Inter" Margin="0,12,0,5"/>
-                        <Border CornerRadius="3" BorderThickness="0.5" Background="White" BorderBrush="Black" Height="30">
-                            <TextBox x:Name="userIdTB" materialDesign:HintAssist.Background="Transparent" materialDesign:HintAssist.Hint="User ID"
-                                materialDesign:HintAssist.Foreground="Black" 
-                                materialDesign:TextFieldAssist.DecorationVisibility="Hidden" CaretBrush="Green"
-                                Foreground="Black" VerticalContentAlignment="Center" Width="340" Height="30" IsReadOnly="True"/>
-                        </Border>
 
                         <TextBlock Text="First Name" Foreground="White" FontSize="14" FontWeight="Medium" FontFamily="Inter" Margin="0,8,0,5"/>
                         <Border CornerRadius="3" BorderThickness="0.5" Background="White" BorderBrush="Black" Height="30">
@@ -168,7 +160,7 @@
                                 Foreground="Black" VerticalContentAlignment="Center" Width="340" Height="30"/>
                         </Border>
 
-                        <StackPanel Margin="0,18,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel Margin="0,55,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
                             <Button x:Name="updateUserBTN" materialDesign:ButtonAssist.CornerRadius="6" materialDesign:ElevationAssist.Elevation="Dp0" Width="90" Height="32" Background="#4A90E2" BorderBrush="#4A90E2" Margin="0,0,15,0" IsEnabled="False" Click="updateUserBTN_Click">
                                 <WrapPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="AccountEdit" VerticalAlignment="Center" Margin="0,0,4,0" Foreground="White" Width="14" Height="14">

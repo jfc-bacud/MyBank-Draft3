@@ -43,7 +43,7 @@
                         </WrapPanel>
                     </Button>
 
-                    <Button x:Name="SettingsBTN" materialDesign:ButtonAssist.CornerRadius="6" materialDesign:ElevationAssist.Elevation="Dp0" Width="Auto" Height="35" Background="#161d24" BorderBrush="#161d24" Margin="0 15 0 0">
+                    <Button x:Name="SettingsBTN" materialDesign:ButtonAssist.CornerRadius="6" materialDesign:ElevationAssist.Elevation="Dp0" Width="Auto" Height="35" Background="#161d24" BorderBrush="#161d24" Margin="0 15 0 0" Click="SettingsBTN_Click">
                         <WrapPanel Width="120">
                             <materialDesign:PackIcon Kind="Gear" VerticalAlignment="Center" Margin="0 0 15 0" Foreground="White"/>
                             <TextBlock Foreground="White">Settings</TextBlock>

@@ -77,7 +77,7 @@ namespace MyBank_Draft3.AppWindows.Admin
         private void staffBTN_Click(object sender, RoutedEventArgs e)
         {
             ClearBTNColor(sender as Button);
-            staffPage = new StaffList();
+            staffPage = new StaffList(localUser);
             adminWindowFrame.Content = staffPage;
             SelectedBTNColor(sender as Button);
         }
@@ -85,7 +85,7 @@ namespace MyBank_Draft3.AppWindows.Admin
         private void SettingsBTN_Click(object sender, RoutedEventArgs e)
         {
             ClearBTNColor(sender as Button);
-            settingsPage = new SettingsStaff();
+            settingsPage = new SettingsStaff(localUser);
             adminWindowFrame.Content = settingsPage;
             SelectedBTNColor(sender as Button);
         }

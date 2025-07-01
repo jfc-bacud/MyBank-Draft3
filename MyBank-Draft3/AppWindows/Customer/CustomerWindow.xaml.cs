@@ -25,6 +25,7 @@ namespace MyBank_Draft3.AppWindows.Customer
         Database _localdb;
         TransactionsPage transactionPage;
         ReportsPage reportsPage;
+        SettingsPage settingsPage;
         string localUser;
 
         public CustomerWindow(string userEmail)
@@ -73,9 +74,10 @@ namespace MyBank_Draft3.AppWindows.Customer
             string hexCode = "#161d24";
             Color color = (Color)ColorConverter.ConvertFromString(hexCode);
 
+            Reports.Background = new SolidColorBrush(color);
             homeBTN.Background = new SolidColorBrush(color);
             TransactionsBTN.Background = new SolidColorBrush(color);
-            Reports.Background = new SolidColorBrush(color);
+            SettingsBTN.Background = new SolidColorBrush(color);
         }
 
         private void SelectedBTNColor(Button button)
@@ -88,6 +90,14 @@ namespace MyBank_Draft3.AppWindows.Customer
             ClearBTNColor(sender as Button);
             reportsPage = new ReportsPage(localUser);
             windowFrame.Content = reportsPage;
+            SelectedBTNColor(sender as Button);
+        }
+
+        private void SettingsBTN_Click(object sender, RoutedEventArgs e)
+        {
+            ClearBTNColor(sender as Button);
+            settingsPage = new SettingsPage(localUser);
+            windowFrame.Content = settingsPage;
             SelectedBTNColor(sender as Button);
         }
     }

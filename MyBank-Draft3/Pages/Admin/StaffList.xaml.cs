@@ -22,11 +22,13 @@ namespace MyBank_Draft3.Pages.Admin
     public partial class StaffList : Page
     {
         Database _localdb;
+        string localUser;
         bool AdminSelected = false;
         string selectedAdminId = "";
 
-        public StaffList()
+        public StaffList(string UID)
         {
+            localUser = UID;
             InitializeComponent();
             LoadDatabase();
 
@@ -42,6 +44,7 @@ namespace MyBank_Draft3.Pages.Admin
         private void FetchAllAdmins()
         {
             var admins = from a in _localdb.db.Admins
+                         where a.User_ID != localUser 
                          select new
                          {
                              AdminID = a.Admin_ID,
@@ -76,9 +79,6 @@ namespace MyBank_Draft3.Pages.Admin
                 AdminSelectionTrigger();
 
                 var selectedAdmin = (dynamic)AdminsListView.SelectedItem;
-                selectedAdminId = selectedAdmin.AdminID;
-
-                userIdTB.Text = selectedAdmin.UserID;
                 firstNameTB.Text = selectedAdmin.Name.Split(' ')[0];
                 lastNameTB.Text = selectedAdmin.Name.Split(' ')[1];
                 emailTB.Text = selectedAdmin.Email;
@@ -90,6 +90,7 @@ namespace MyBank_Draft3.Pages.Admin
         {
             AdminSelected = true;
             updateAdminBTN.IsEnabled = true;
+            updateAdminBTN.Content = "Update";
             deleteAdminBTN.IsEnabled = true;
             clearSelectionBTN.IsEnabled = true;
             clearSelectionBTN.Opacity = 1;
@@ -110,8 +111,8 @@ namespace MyBank_Draft3.Pages.Admin
             clearSelectionBTN.IsEnabled = false;
             clearSelectionBTN.Opacity = 0;
 
+            updateAdminBTN.Content = "Add";
             AdminsListView.SelectedItem = null;
-            userIdTB.Text = "";
             firstNameTB.Text = "";
             lastNameTB.Text = "";
             emailTB.Text = "";
@@ -128,7 +129,6 @@ namespace MyBank_Draft3.Pages.Admin
 
                     if (adminToUpdate != null)
                     {
-                        adminToUpdate.User_ID = userIdTB.Text.Trim();
                         adminToUpdate.Admin_FirstName = firstNameTB.Text.Trim();
                         adminToUpdate.Admin_LastName = lastNameTB.Text.Trim();
                         adminToUpdate.Admin_Email = emailTB.Text.Trim();
@@ -140,6 +140,47 @@ namespace MyBank_Draft3.Pages.Admin
 
                         LoadDatabase();
                         ClearSelection();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error updating admin: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                try
+                {
+                    var lastUID = _localdb.db.Users.OrderByDescending(t => t.User_ID).FirstOrDefault();
+                    string newUID = "T" + ((int.Parse(lastUID.User_ID.Substring(1))).ToString("D2") + 1);
+
+                    var lastAID = _localdb.db.Admins.OrderByDescending(t => t.Admin_ID).FirstOrDefault();
+                    string newAID = "T" + ((int.Parse(lastAID.Admin_ID.Substring(1))).ToString("D2") + 1);
+
+                    var _newUser = new User
+                    {
+                        User_ID = newUID,
+                        Role_ID = "R02"
+                    };
+
+                    var _newAdmin = new Classes.Admin
+                    {
+                        Admin_ID = newAID,
+                        User_ID = newUID,
+                        Admin_FirstName = firstNameTB.Text,
+                        Admin_LastName = lastNameTB.Text,
+                        Admin_Email = emailTB.Text,
+                        Admin_Password = passwordTB.Password
+                    };
+
+                    if (_newUser != null && _newAdmin != null)
+                    {
+                        _localdb.db.Users.InsertOnSubmit(_newUser);
+                        _localdb.db.Admins.InsertOnSubmit(_newAdmin);
+                        _localdb.db.SubmitChanges();
+
+                        MessageBox.Show("Admin updated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                        LoadDatabase();
                     }
                 }
                 catch (Exception ex)
@@ -185,13 +226,6 @@ namespace MyBank_Draft3.Pages.Admin
 
         private bool ValidateAdminInput()
         {
-            if (string.IsNullOrWhiteSpace(userIdTB.Text))
-            {
-                MessageBox.Show("User ID is required.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                userIdTB.Focus();
-                return false;
-            }
-
             if (string.IsNullOrWhiteSpace(firstNameTB.Text))
             {
                 MessageBox.Show("First name is required.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -224,15 +258,6 @@ namespace MyBank_Draft3.Pages.Admin
             {
                 MessageBox.Show("Password is required.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 passwordTB.Focus();
-                return false;
-            }
-
-            // Check if User ID is already taken by another admin
-            var existingAdminByUserId = _localdb.db.Admins.FirstOrDefault(a => a.User_ID == userIdTB.Text.Trim() && a.Admin_ID != selectedAdminId);
-            if (existingAdminByUserId != null)
-            {
-                MessageBox.Show("This User ID is already assigned to another admin.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                userIdTB.Focus();
                 return false;
             }
 
