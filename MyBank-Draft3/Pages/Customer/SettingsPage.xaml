@@ -1,0 +1,54 @@
+﻿<Page x:Class="MyBank_Draft3.Pages.Customer.SettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MyBank_Draft3.Pages.Customer"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1000"
+      Title="SettingsPage">
+    <Border CornerRadius="0 20 20 0" Background="#12171d" BorderBrush="Black" >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="600"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Row="1" Grid.Column="0">
+                <WrapPanel Margin="20" Orientation="Horizontal">
+                    <TextBlock Text="Settings" Foreground="White" FontSize="32" FontWeight="Medium" FontFamily="Inter" Margin="30 0 0 0"/>
+                </WrapPanel>
+
+                <Button x:Name="accountBTN" materialDesign:ButtonAssist.CornerRadius="6" materialDesign:ElevationAssist.Elevation="Dp0" Width="140" Height="35" Background="Green" BorderBrush="Green" Margin="0 25 0 0">
+                    <WrapPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="People" VerticalAlignment="Center" Margin="0 0 5 0" Foreground="White">
+                            <materialDesign:PackIcon.Effect>
+                                <DropShadowEffect ShadowDepth="0" Direction="0" Color="White" Opacity="0.6" BlurRadius="3"/>
+                            </materialDesign:PackIcon.Effect>
+                        </materialDesign:PackIcon>
+                        <TextBlock x:Name="accountButtonTB" Foreground="White">Account</TextBlock>
+                    </WrapPanel>
+                </Button>
+
+                <Button x:Name="GeneralBTN" materialDesign:ButtonAssist.CornerRadius="6" materialDesign:ElevationAssist.Elevation="Dp0" Width="140" Height="35" Background="Green" BorderBrush="Green" Margin="0 25 0 0">
+                    <WrapPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="People" VerticalAlignment="Center" Margin="0 0 5 0" Foreground="White">
+                            <materialDesign:PackIcon.Effect>
+                                <DropShadowEffect ShadowDepth="0" Direction="0" Color="White" Opacity="0.6" BlurRadius="3"/>
+                            </materialDesign:PackIcon.Effect>
+                        </materialDesign:PackIcon>
+                        <TextBlock Foreground="White">General</TextBlock>
+                    </WrapPanel>
+                </Button>
+
+            </StackPanel>
+
+
+        </Grid>
+    </Border>
+</Page>

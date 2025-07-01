@@ -10,7 +10,6 @@
       d:DesignHeight="700" d:DesignWidth="1000"
       Title="TransactionsPage">
 
-
     <Page.Resources>
         <Style TargetType="GridViewColumnHeader">
             <Setter Property="Foreground" Value="White"/>

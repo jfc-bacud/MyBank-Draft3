@@ -65,7 +65,7 @@ namespace MyBank_Draft3.Pages.Customer
             }).ToList();
 
             MonthViewData.ItemsSource = results;
-        }
+        } // FIX INCOME / EXPENSE DISPLAY
 
         private void MonthViewData_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -106,8 +106,8 @@ namespace MyBank_Draft3.Pages.Customer
         {
             clearBTN.Opacity = 0;
             clearBTN.IsEnabled = false;
-            Design.Visibility = Visibility.Hidden;
-            View.Visibility = Visibility.Visible;
+            Design.Visibility = Visibility.Visible;
+            View.Visibility = Visibility.Hidden;
         }
 
         private void clearBTN_Click(object sender, RoutedEventArgs e)

@@ -68,7 +68,7 @@ namespace MyBank_Draft3.Pages.Main
                 role = "Customer";
                 return true;
             }
-            else if (possibleCustomer != null)
+            else if (possibleAdmin != null)
             {
                 role = "Admin";
                 return true;
@@ -116,7 +116,7 @@ namespace MyBank_Draft3.Pages.Main
             }
             else if (role == "Admin")
             {
-                AdminWindow adminWindow = new AdminWindow();
+                AdminWindow adminWindow = new AdminWindow(userIN.Text);
                 adminWindow.Show();
                 Window.GetWindow(this).Close();
             }
