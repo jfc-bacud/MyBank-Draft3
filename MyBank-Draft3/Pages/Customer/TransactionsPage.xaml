@@ -7,8 +7,8 @@
       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       xmlns:local="clr-namespace:MyBank_Draft3.Pages.Customer"
       mc:Ignorable="d" 
-        d:DesignHeight="700" d:DesignWidth="1000"
-  Title="TransactionsPage">
+      d:DesignHeight="700" d:DesignWidth="1000"
+      Title="TransactionsPage">
 
 
     <Page.Resources>
@@ -89,55 +89,108 @@
 
                 <materialDesign:Card Background="#131a22" Grid.Row="1" Grid.Column="0" UniformCornerRadius="8" Width="500" Height="500" VerticalAlignment="Center">
                     <StackPanel>
-                        <ListView x:Name="ListViewData" ItemsSource="{Binding _recordedTransactions}" BorderThickness="0">
-                            <ListView.View>
-                                <GridView>
-                                    
-                                    <GridViewColumn Header="Transaction" Width="200">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Transact}"/>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
+                        <Border Background="#19212a" Height="45" CornerRadius="8 8 0 0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="180"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
 
-                                    <GridViewColumn Header="Date" Width="100">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Date, StringFormat='MMM-dd-yy'}"/>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
+                                <TextBlock Text="Transactions" Grid.Column="0" Margin="15,2" Foreground="White" FontWeight="Bold" FontFamily="Inter" FontSize="13" VerticalAlignment="Center"/>
+                                <TextBlock Text="Date" Grid.Column="1" Margin="15,2" Foreground="White" FontWeight="Bold" FontFamily="Inter" FontSize="13" VerticalAlignment="Center"/>
+                                <TextBlock Text="Amount" Grid.Column="2" Margin="15,2" Foreground="White" FontWeight="Bold" FontFamily="Inter" FontSize="13" VerticalAlignment="Center" />
+                                <TextBlock Text="Type" Grid.Column="3" Margin="15,2" Foreground="White" FontWeight="Bold" FontFamily="Inter" FontSize="13" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
 
-                                    <GridViewColumn Header="Amount" Width="100">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Amount, StringFormat=C}"/>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
+                        <ListView x:Name="ListViewData" BorderThickness="0" SelectionChanged="ListViewData_SelectionChanged">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="180"/>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="100"/>
+                                        </Grid.ColumnDefinitions>
 
-                                    <GridViewColumn Header="Type" Width="100">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Type}"/>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="15"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
 
-                                </GridView>
-                            </ListView.View>
+                                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Transaction}" Margin="5,-5,0,10" VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Date, StringFormat=MM/dd/yyyy}" Margin="5,-5,0,10" VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding Amount, StringFormat=C}" Margin="5,-5,0,10" VerticalAlignment="Center"/>
+
+                                        <Border Grid.Column="3" Grid.Row="1" Width="56" Height="25" CornerRadius="3" Margin="5,-5,0,10" VerticalAlignment="Center">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Type}" Value="Expense">
+                                                            <Setter Property="Background" Value="DarkRed"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Type}" Value="Income">
+                                                            <Setter Property="Background" Value="Green"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding Type}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
+                                        </Border>
+                                        
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
                         </ListView>
                     </StackPanel>
                 </materialDesign:Card>
             </StackPanel>
 
+
+            <materialDesign:Card Background="#131a22" Grid.Row="1" Grid.Column="1" UniformCornerRadius="8" Width="355" Height="65" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <WrapPanel Orientation="Horizontal">
+                    <Border Height="65" Width="100" HorizontalAlignment="Left" Background="#171f27" CornerRadius="8 0 0 8">
+                        <materialDesign:PackIcon x:Name="CurrencyIcon" Kind="CurrencyUsd" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 0" Foreground="Green" Width="55" Height="55"/>
+                    </Border>
+                    <StackPanel Width="200" VerticalAlignment="Center" Margin="0 15 0 0">
+                        <Label Content="Current Amount" FontFamily="Montserrat" FontWeight="Medium" Foreground="White" Margin="8 -20 0 0"/>
+                        <TextBlock x:Name="balanceTB" Text="$0" FontFamily="Montserrat" FontWeight="Heavy" Foreground="White" Margin="10 0 0 0" FontSize="26"/>
+                    </StackPanel>
+                </WrapPanel>
+            </materialDesign:Card>
+            
             <materialDesign:Card Background="#131a22" Grid.Row="1" Grid.Column="1" UniformCornerRadius="8" Width="355" Height="500" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 5 0 0">
-                <StackPanel x:Name="informationPanel" Margin="20">
+                <StackPanel x:Name="informationPanel" Margin="20 20 20 0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Transaction View" Foreground="White" FontSize="20" FontWeight="Medium" FontFamily="Inter" Margin="0 0 0 5" TextDecorations="Underline"/>
+                        <Button x:Name="clearBTN" materialDesign:ButtonAssist.CornerRadius="6" materialDesign:ElevationAssist.Elevation="Dp0" Width="105" Height="23" Background="Gray" BorderBrush="Gray" Margin="57 -10 0 0" IsEnabled="False" Opacity="0" Click="clearBTN_Click">
+                            <WrapPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Cancel" VerticalAlignment="Center"  Foreground="White">
+                                    <materialDesign:PackIcon.Effect>
+                                        <DropShadowEffect ShadowDepth="0" Direction="0" Color="White" Opacity="0.6" BlurRadius="3"/>
+                                    </materialDesign:PackIcon.Effect>
+                                </materialDesign:PackIcon>
+                                <TextBlock Foreground="White" Margin="0 -2.5 0 0">Deselect</TextBlock>
+                            </WrapPanel>
+                        </Button>
+                    </StackPanel>
 
-                    <TextBlock Text="Transaction View" Foreground="White" FontSize="20" FontWeight="Medium" FontFamily="Inter" Margin="0 0 0 20" TextDecorations="Underline"/>
+                    <TextBlock Text="Transaction Name" Foreground="White" FontSize="15" FontWeight="Medium" FontFamily="Inter" Margin="0 10 0 5"/>
+                    <Border CornerRadius="3" BorderThickness="0.5" Background="White" BorderBrush="Black" Height="32">
+                        <TextBox x:Name="NameTB" materialDesign:HintAssist.Background="Transparent"  materialDesign:HintAssist.Hint="Provide a Short Description (Max. 10 Characters)"
+                            materialDesign:HintAssist.Foreground="Black" 
+                            materialDesign:TextFieldAssist.DecorationVisibility="Hidden" CaretBrush="Green"
+                            TextWrapping="Wrap" Foreground="Black" VerticalScrollBarVisibility="Auto"
+                            HorizontalAlignment="Center" VerticalContentAlignment="Top" Width="310" Height="32" MaxLines="10"/>
 
-                    <TextBlock Text="Category Type" Foreground="White" FontSize="15" FontWeight="Medium" FontFamily="Inter" Margin="0 0 0 5"/>
+                    </Border>
+
+
+
+                    <TextBlock Text="Category Type" Foreground="White" FontSize="15" FontWeight="Medium" FontFamily="Inter" Margin="0 10 0 5"/>
                     <Border CornerRadius="3" BorderThickness="0.5" Background="White" BorderBrush="White" Height="32">
                         <ComboBox x:Name="categoryCB" Margin="3"
                               materialDesign:TextFieldAssist.UnderlineBrush="#131a22"
@@ -148,7 +201,7 @@
                     <TextBlock Text="Date" Foreground="White" FontSize="15" FontWeight="Medium" FontFamily="Inter" Margin="0 10 0 5"/>
                         <Border CornerRadius="3" BorderThickness="0.5" Background="White" BorderBrush="White" Height="32">
                         <DatePicker x:Name="datePicker" Margin="2"  SelectedDate="{Binding SelectedDate, Mode=TwoWay}" 
-                                        materialDesign:HintAssist.Hint="Select a Date"
+                                        materialDesign:HintAssist.Hint="Select a Date (DD/MM/YY)"
                                         materialDesign:HintAssist.Foreground="White"
                                         materialDesign:TextFieldAssist.UnderlineBrush="Transparent">
                         </DatePicker>
@@ -157,11 +210,11 @@
                     <TextBlock Text="Amount" Foreground="White" FontSize="15" FontWeight="Medium" FontFamily="Inter" Margin="0 10 0 5"/>
                     <Border CornerRadius="3" BorderThickness="0.5" Background="White" Height="30">
                         <WrapPanel Orientation="Horizontal">
-                            <TextBox x:Name="AmountTB" Width="214" materialDesign:HintAssist.Hint="0" Foreground="Black" Margin="5 0 -5 0"/>
-                            <Button x:Name="NumUpBTN" Width="50" Height="30" materialDesign:ButtonAssist.CornerRadius="0" Background="#12171d" BorderBrush="Gray" VerticalAlignment="Center">
+                            <TextBox x:Name="AmountTB" Width="214" Text="0" Foreground="Black" Margin="5 0 -5 0"/>
+                            <Button x:Name="NumUpBTN" Width="50" Height="30" materialDesign:ButtonAssist.CornerRadius="0" Background="#12171d" BorderBrush="Gray" VerticalAlignment="Center" Click="NumUpBTN_Click">
                                 <materialDesign:PackIcon Kind="ChevronUp" VerticalAlignment="Center" Margin="0 0 5 0" Foreground="White"></materialDesign:PackIcon>
                             </Button>
-                            <Button x:Name="NumDownBTN" Width="50" Height="30" materialDesign:ButtonAssist.CornerRadius="0" Background="#12171d" BorderBrush="Gray" VerticalAlignment="Center">
+                            <Button x:Name="NumDownBTN" Width="50" Height="30" materialDesign:ButtonAssist.CornerRadius="0" Background="#12171d" BorderBrush="Gray" VerticalAlignment="Center" Click="NumDownBTN_Click">
                                 <materialDesign:PackIcon Kind="ChevronDown" VerticalAlignment="Center" Margin="0 0 5 0" Foreground="White"></materialDesign:PackIcon>
                             </Button>
 
@@ -170,27 +223,27 @@
 
 
                     <TextBlock Text="Transaction Description" Foreground="White" FontSize="15" FontWeight="Medium" FontFamily="Inter" Margin="0 10 0 5"/>
-                    <Border CornerRadius="3" BorderThickness="0.5" Background="White" BorderBrush="Black" Height="120">
-                        <TextBox x:Name="TransactionNameTB" materialDesign:HintAssist.Background="Transparent"  materialDesign:HintAssist.Hint="Provide a Short Description"
+                    <Border CornerRadius="3" BorderThickness="0.5" Background="White" BorderBrush="Black" Height="80">
+                        <TextBox x:Name="DescriptionTB" materialDesign:HintAssist.Background="Transparent"  materialDesign:HintAssist.Hint="Provide a Short Description (Max. 50 Charaacters)"
                                  materialDesign:HintAssist.Foreground="Black" 
                                  materialDesign:TextFieldAssist.DecorationVisibility="Hidden" CaretBrush="Green"
                                  TextWrapping="Wrap" Foreground="Black" VerticalScrollBarVisibility="Auto"
-                                 HorizontalAlignment="Center" VerticalContentAlignment="Top" Width="310" Height="120"/>
+                                 HorizontalAlignment="Center" VerticalContentAlignment="Top" Width="310" Height="80" MaxLines="50"/>
                     </Border>
 
-                    <StackPanel Margin="0 30 0 0" Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button x:Name="addTransactionBTN" materialDesign:ButtonAssist.CornerRadius="6" materialDesign:ElevationAssist.Elevation="Dp0" Width="100" Height="35" Background="Green" BorderBrush="Green" Margin="0 0 20 0">
+                    <StackPanel Margin="0 22 0 0" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button x:Name="addTransactionBTN" materialDesign:ButtonAssist.CornerRadius="6" materialDesign:ElevationAssist.Elevation="Dp0" Width="100" Height="35" Background="Green" BorderBrush="Green" Margin="0 0 20 0" Click="addTransactionBTN_Click">
                             <WrapPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="Add" VerticalAlignment="Center" Margin="0 0 5 0" Foreground="White">
                                     <materialDesign:PackIcon.Effect>
                                         <DropShadowEffect ShadowDepth="0" Direction="0" Color="White" Opacity="0.6" BlurRadius="3"/>
                                     </materialDesign:PackIcon.Effect>
                                 </materialDesign:PackIcon>
-                                <TextBlock Foreground="White">Add</TextBlock>
+                                <TextBlock x:Name="addButtonTB" Foreground="White">Add</TextBlock>
                             </WrapPanel>
                         </Button>
 
-                        <Button x:Name="deleteTransactionBTN" materialDesign:ButtonAssist.CornerRadius="6" materialDesign:ElevationAssist.Elevation="Dp0" Width="100" Height="35" Background="DarkRed" BorderBrush="DarkRed">
+                        <Button x:Name="deleteTransactionBTN" materialDesign:ButtonAssist.CornerRadius="6" materialDesign:ElevationAssist.Elevation="Dp0" Width="100" Height="35" Background="DarkRed" BorderBrush="DarkRed" IsEnabled="False" Click="deleteTransactionBTN_Click">
                             <WrapPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="Trash" VerticalAlignment="Center" Margin="0 0 5 0" Foreground="White">
                                     <materialDesign:PackIcon.Effect>

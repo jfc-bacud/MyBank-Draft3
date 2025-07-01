@@ -3,12 +3,55 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:MyBank_Draft3.Pages.Main"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="700" d:DesignWidth="1000"
       Title="SignUp">
+    <Border CornerRadius="20" Background="#12171d" BorderBrush="Black" Height="700" Width="1000">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-    <Grid>
-        
-    </Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="800"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center">
+                <WrapPanel Orientation="Horizontal" Margin="0 20 0 40">
+                    <TextBlock Text="Welcome to " FontSize="40" FontWeight="Medium" FontFamily="Inter" Foreground="White"/>
+                    <TextBlock Text="MyBank!" FontSize="40" FontWeight="Medium" FontFamily="Inter" Foreground="Green"/>
+                </WrapPanel>
+
+                <Label Content="First Name" Foreground="White" FontSize="15" FontWeight="Medium" FontFamily="Montserrat" Margin="0,0,0,5"/>
+                <TextBox x:Name="fnameIN"
+             FontSize="14" Foreground="White"
+             materialDesign:TextFieldAssist.UnderlineBrush="Green" FontFamily="Montserrat"
+             Width="Auto" CaretBrush="Green"/>
+
+                <Label Content="Last Name" Foreground="White" FontSize="15" FontWeight="Medium" FontFamily="Montserrat" Margin="0,15,0,5"/>
+                <TextBox x:Name="lnameIN"
+             FontSize="14" Foreground="White"
+             materialDesign:TextFieldAssist.UnderlineBrush="Green" FontFamily="Montserrat"
+             Width="Auto" CaretBrush="Green"/>
+
+                <Label Content="Email" Foreground="White" FontSize="15" FontWeight="Medium" FontFamily="Montserrat" Margin="0,15,0,5"/>
+                <TextBox x:Name="emailIN" FontSize="14" Foreground="White" materialDesign:TextFieldAssist.UnderlineBrush="Green" FontFamily="Montserrat" Width="Auto" CaretBrush="Green"/>
+
+                <Label Content="Password" Foreground="White" FontSize="15" FontWeight="Medium" FontFamily="Montserrat" Margin="0,15,0,5"/>
+                <TextBox x:Name="passIN" FontSize="14" Foreground="White" materialDesign:TextFieldAssist.UnderlineBrush="Green" FontFamily="Montserrat" Width="Auto" CaretBrush="Green"/>
+
+                <Button x:Name="Continue" Content="Continue" Width="200" Height="40" Margin="0 70 0 0 " Foreground="Black" BorderBrush="Black" Background="White" Click="Continue_Click" />
+            </StackPanel>
+
+            <Border CornerRadius="0 20 20 0" Height="Auto" Margin="699,-4,-300,-158" Grid.RowSpan="2" Grid.ColumnSpan="2" >
+                <Border.Background>
+                    <ImageBrush ImageSource = "/Assets/Pictures/green.png"/>
+                </Border.Background>
+            </Border>
+        </Grid>
+    </Border>
 </Page>

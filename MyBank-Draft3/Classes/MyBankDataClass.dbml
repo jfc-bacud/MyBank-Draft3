@@ -14,7 +14,6 @@
   <Table Name="dbo.Category" Member="Categories">
     <Type Name="Category">
       <Column Name="Category_ID" Type="System.String" DbType="NVarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Category_Desc" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Category_Type" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="Category_Transaction" Member="Transactions" ThisKey="Category_ID" OtherKey="Category_ID" Type="Transaction" />
     </Type>
@@ -47,6 +46,7 @@
       <Column Name="Amount" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
       <Column Name="Transaction_Desc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Transaction_Date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Transaction_Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="Category_Transaction" Member="Category" ThisKey="Category_ID" OtherKey="Category_ID" Type="Category" IsForeignKey="true" />
       <Association Name="User_Transaction" Member="User" ThisKey="User_ID" OtherKey="User_ID" Type="User" IsForeignKey="true" />
     </Type>

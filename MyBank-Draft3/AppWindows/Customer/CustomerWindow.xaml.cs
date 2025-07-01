@@ -24,19 +24,23 @@ namespace MyBank_Draft3.AppWindows.Customer
         Home homePage;
         Database _localdb;
         TransactionsPage transactionPage;
+        ReportsPage reportsPage;
         string localUser;
+
         public CustomerWindow(string userEmail)
         {
             InitializeComponent();
             RetrieveUser(userEmail);
             ViewHome();
         }
+
         public void ViewHome()
         {
             homeBTN.Background = new SolidColorBrush(Colors.Green);
             homePage = new Home(localUser);
             windowFrame.Content = homePage;
         }
+
         public void RetrieveUser(string userEmail)
         {
             _localdb = new Database();
@@ -47,7 +51,6 @@ namespace MyBank_Draft3.AppWindows.Customer
 
             localUser = user.ToString();
         }
-
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -72,11 +75,20 @@ namespace MyBank_Draft3.AppWindows.Customer
 
             homeBTN.Background = new SolidColorBrush(color);
             TransactionsBTN.Background = new SolidColorBrush(color);
+            Reports.Background = new SolidColorBrush(color);
         }
 
         private void SelectedBTNColor(Button button)
         {
             button.Background = new SolidColorBrush(Colors.Green);
+        }
+
+        private void Reports_Click(object sender, RoutedEventArgs e)
+        {
+            ClearBTNColor(sender as Button);
+            reportsPage = new ReportsPage(localUser);
+            windowFrame.Content = reportsPage;
+            SelectedBTNColor(sender as Button);
         }
     }
 }

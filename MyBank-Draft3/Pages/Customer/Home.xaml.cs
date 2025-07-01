@@ -34,7 +34,7 @@ namespace MyBank_Draft3.Pages.Customer
             localUser = user;
             LoadDatabase();
         }
-
+        
         void LoadDatabase()
         {
             _localdb = new Database();
@@ -87,6 +87,7 @@ namespace MyBank_Draft3.Pages.Customer
 
             doughnutIncome.Series = pieSeries;
         }
+
         void LoadExpense()
         {
             Random rnd = new Random();
@@ -128,6 +129,7 @@ namespace MyBank_Draft3.Pages.Customer
 
             doughnutTransactions.Series = pieSeries;
         }
+
         void RetrieveUser()
         {
             var username = (from c in _localdb.db.Customers
@@ -136,6 +138,7 @@ namespace MyBank_Draft3.Pages.Customer
 
             usernameTB.Text = username.ToString() + "!";
         }
+
         void RetrieveWallet()
         {
             var userWallet = (from c in _localdb.db.Customers
@@ -151,6 +154,7 @@ namespace MyBank_Draft3.Pages.Customer
             RetrieveExpenses();
             RetrieveIncome();
         }
+
         void RetrieveExpenses()
         {
             var _expenses = from t in _localdb.db.Transactions
@@ -166,6 +170,7 @@ namespace MyBank_Draft3.Pages.Customer
 
             expenseTB.Text = currencyUsed + _expenses.Sum(e => e.TotalAmount).ToString();
         }
+
         void RetrieveIncome()
         {
             var _income = from t in _localdb.db.Transactions
@@ -181,6 +186,7 @@ namespace MyBank_Draft3.Pages.Customer
 
             incomeTB.Text = currencyUsed + _income.Sum(e => e.TotalAmount).ToString();
         }
+
         void RetrieveCurrency(UserWallet wallet)
         {
             string walletCurrency = wallet.UserWallet_Currency.ToString();
@@ -195,6 +201,7 @@ namespace MyBank_Draft3.Pages.Customer
                 }
             }
         }
+
         void RetrieveCurrencyIcon(string currency)
         {
             string newCurrency = null;

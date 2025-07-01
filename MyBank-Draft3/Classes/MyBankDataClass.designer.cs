@@ -371,8 +371,6 @@ namespace MyBank_Draft3.Classes
 		
 		private string _Category_ID;
 		
-		private string _Category_Desc;
-		
 		private string _Category_Type;
 		
 		private EntitySet<Transaction> _Transactions;
@@ -383,8 +381,6 @@ namespace MyBank_Draft3.Classes
     partial void OnCreated();
     partial void OnCategory_IDChanging(string value);
     partial void OnCategory_IDChanged();
-    partial void OnCategory_DescChanging(string value);
-    partial void OnCategory_DescChanged();
     partial void OnCategory_TypeChanging(string value);
     partial void OnCategory_TypeChanged();
     #endregion
@@ -411,26 +407,6 @@ namespace MyBank_Draft3.Classes
 					this._Category_ID = value;
 					this.SendPropertyChanged("Category_ID");
 					this.OnCategory_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Category_Desc", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string Category_Desc
-		{
-			get
-			{
-				return this._Category_Desc;
-			}
-			set
-			{
-				if ((this._Category_Desc != value))
-				{
-					this.OnCategory_DescChanging(value);
-					this.SendPropertyChanging();
-					this._Category_Desc = value;
-					this.SendPropertyChanged("Category_Desc");
-					this.OnCategory_DescChanged();
 				}
 			}
 		}
@@ -921,6 +897,8 @@ namespace MyBank_Draft3.Classes
 		
 		private System.DateTime _Transaction_Date;
 		
+		private string _Transaction_Name;
+		
 		private EntityRef<Category> _Category;
 		
 		private EntityRef<User> _User;
@@ -941,6 +919,8 @@ namespace MyBank_Draft3.Classes
     partial void OnTransaction_DescChanged();
     partial void OnTransaction_DateChanging(System.DateTime value);
     partial void OnTransaction_DateChanged();
+    partial void OnTransaction_NameChanging(string value);
+    partial void OnTransaction_NameChanged();
     #endregion
 		
 		public Transaction()
@@ -1074,6 +1054,26 @@ namespace MyBank_Draft3.Classes
 					this._Transaction_Date = value;
 					this.SendPropertyChanged("Transaction_Date");
 					this.OnTransaction_DateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Transaction_Name", DbType="NVarChar(50)")]
+		public string Transaction_Name
+		{
+			get
+			{
+				return this._Transaction_Name;
+			}
+			set
+			{
+				if ((this._Transaction_Name != value))
+				{
+					this.OnTransaction_NameChanging(value);
+					this.SendPropertyChanging();
+					this._Transaction_Name = value;
+					this.SendPropertyChanged("Transaction_Name");
+					this.OnTransaction_NameChanged();
 				}
 			}
 		}

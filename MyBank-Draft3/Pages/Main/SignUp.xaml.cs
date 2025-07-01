@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyBank_Draft3.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,106 @@ namespace MyBank_Draft3.Pages.Main
     /// </summary>
     public partial class SignUp : Page
     {
+        Database _localdb;
+
         public SignUp()
         {
             InitializeComponent();
+            LoadDatabase();
         }
+
+        void LoadDatabase()
+        {
+            _localdb = new Database();
+        }
+
+        private void Continue_Click(object sender, RoutedEventArgs e)
+        {
+            if (String.IsNullOrEmpty(fnameIN.Text) || String.IsNullOrEmpty(lnameIN.Text) || String.IsNullOrEmpty(emailIN.Text) || String.IsNullOrEmpty(passIN.Text))
+            {
+                return;
+            }
+
+            else
+            {
+                AddUser();
+            }
+        }
+
+        private void AddUser()
+        {
+            if (!_localdb.db.Customers.Any(c => c.Customer_Email == emailIN.Text.ToString()))
+            {
+                var lastUID = _localdb.db.Users.OrderByDescending(u => u.User_ID).FirstOrDefault();
+                var lastCID = _localdb.db.Customers.OrderByDescending(c => c.Customer_ID).FirstOrDefault();
+
+                string newCID = "C" + (int.Parse(lastCID.Customer_ID.Substring(1))).ToString("D2");
+                string newUID = "C" + (int.Parse(lastUID.User_ID.Substring(1))).ToString("D2");
+                int UWID = GenerateNum();
+
+                var _newUser = new User
+                {
+                    User_ID = newUID,
+                    Role_ID = "R01"
+                };
+
+                var _newUserWallet = new UserWallet
+                {
+                    UserWallet_ID = UWID,
+                    UserWallet_Balance = 0,
+                    UserWallet_Currency = "USD"
+                };
+
+                var _newCustomer = new Classes.Customer
+                {
+                    Customer_ID = newCID,
+                    User_ID = newUID,
+                    UserWallet_ID = UWID,
+                    Customer_FirstName = fnameIN.Text,
+                    Customer_LastName = lnameIN.Text,
+                    Customer_Email = emailIN.Text,
+                    Customer_Password = passIN.Text,
+                };
+
+                _localdb.db.Users.InsertOnSubmit(_newUser);
+                SubmitChanges();
+                _localdb.db.UserWallets.InsertOnSubmit(_newUserWallet);
+                SubmitChanges();
+                _localdb.db.Customers.InsertOnSubmit(_newCustomer);
+                SubmitChanges();
+            }
+        }
+
+        private int GenerateNum()
+        {
+            Random rnd = new Random();
+            int generatedNum;
+
+            while (true)
+            {
+                generatedNum = rnd.Next(0, 9999999);
+
+                if (!_localdb.db.UserWallets.Any(u => u.UserWallet_ID == generatedNum))
+                {
+                    break;
+                }
+            }
+
+            return generatedNum;
+        }
+
+        private void SubmitChanges()
+        {
+            try
+            {
+                _localdb.db.SubmitChanges();
+                LoadDatabase();
+            }
+            catch
+            {
+                return;
+            }
+        }
+
     }
 }
