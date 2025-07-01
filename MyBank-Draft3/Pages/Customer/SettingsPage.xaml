@@ -19,12 +19,17 @@
                 <ColumnDefinition Width="600"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Row="1" Grid.Column="0">
-                <WrapPanel Margin="20" Orientation="Horizontal">
-                    <TextBlock Text="Settings" Foreground="White" FontSize="32" FontWeight="Medium" FontFamily="Inter" Margin="30 0 0 0"/>
+            <StackPanel Grid.Row="1" Grid.Column="0" Margin="0 10 0 0">
+                <WrapPanel Margin="50 0 50 0" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <materialDesign:PackIcon Kind="People" VerticalAlignment="Center" Height="50" Width="50" Foreground="White"/>
+                    <WrapPanel Orientation="Vertical">
+                        <TextBlock x:Name="userTB" Text="johncena@gmail.com" Foreground="White" FontSize="20" FontWeight="Medium" FontFamily="Inter" Margin="13 0 0 0"/>
+                        <TextBlock Text="Your Personal Account" Foreground="Gray" FontSize="15" FontWeight="Medium" FontFamily="Inter" Margin="10 0 0 0"/>
+                    </WrapPanel>
+                    
                 </WrapPanel>
 
-                <Button x:Name="accountBTN" materialDesign:ButtonAssist.CornerRadius="6" materialDesign:ElevationAssist.Elevation="Dp0" Width="140" Height="35" Background="Green" BorderBrush="Green" Margin="0 25 0 0">
+                <Button x:Name="AccountBTN" materialDesign:ButtonAssist.CornerRadius="6" Width="250" Height="35" Background="#12171d" BorderBrush="White" Margin="0 25 0 0" Click="AccountBTN_Click">
                     <WrapPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="People" VerticalAlignment="Center" Margin="0 0 5 0" Foreground="White">
                             <materialDesign:PackIcon.Effect>
@@ -35,7 +40,7 @@
                     </WrapPanel>
                 </Button>
 
-                <Button x:Name="GeneralBTN" materialDesign:ButtonAssist.CornerRadius="6" materialDesign:ElevationAssist.Elevation="Dp0" Width="140" Height="35" Background="Green" BorderBrush="Green" Margin="0 25 0 0">
+                <Button x:Name="GeneralBTN" materialDesign:ButtonAssist.CornerRadius="6" Width="250" Height="35" Background="#12171d" BorderBrush="White" Margin="0 25 0 0" Click="GeneralBTN_Click">
                     <WrapPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="People" VerticalAlignment="Center" Margin="0 0 5 0" Foreground="White">
                             <materialDesign:PackIcon.Effect>
@@ -45,9 +50,143 @@
                         <TextBlock Foreground="White">General</TextBlock>
                     </WrapPanel>
                 </Button>
-
             </StackPanel>
 
+            <StackPanel x:Name="AccountView" Grid.Column="1" Grid.Row="1" Margin="25" Visibility="Hidden">
+                <TextBlock Text="Profile" Foreground="White" FontSize="30" FontWeight="Medium" FontFamily="Inter" Margin="0 0 0 0"/>
+                <WrapPanel Orientation="Horizontal" Margin="0 8 0 0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Border BorderThickness="0 0.5 0 0" BorderBrush="LightGray" Width="550" HorizontalAlignment="Center"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Vertical">
+                    <TextBlock Text="First Name" Foreground="White" FontSize="20" FontWeight="Medium" FontFamily="Inter" Margin="0 20 0 5"/>
+                    <Border CornerRadius="3" BorderThickness="0.5" Background="White" BorderBrush="Black" Height="32" Width="550">
+                        <TextBox x:Name="FirstTB" materialDesign:HintAssist.Background="Transparent"  materialDesign:HintAssist.Hint="Provide a Short Description (Max. 10 Characters)"
+                        materialDesign:HintAssist.Foreground="Black" 
+                        materialDesign:TextFieldAssist.DecorationVisibility="Hidden" CaretBrush="Green"
+                        TextWrapping="Wrap" Foreground="Black" 
+                        HorizontalAlignment="Center" VerticalContentAlignment="Top" Width="540" Height="32" MaxLines="10"/>
+                    </Border>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Vertical">
+                    <TextBlock Text="Last Name" Foreground="White" FontSize="20" FontWeight="Medium" FontFamily="Inter" Margin="0 25 0 5"/>
+                    <Border CornerRadius="3" BorderThickness="0.5" Background="White" BorderBrush="Black" Height="32" Width="550">
+                        <TextBox x:Name="LastTB" materialDesign:HintAssist.Background="Transparent"  materialDesign:HintAssist.Hint="Cena (Max. 10 Characters)"
+                        materialDesign:HintAssist.Foreground="Black" 
+                        materialDesign:TextFieldAssist.DecorationVisibility="Hidden" CaretBrush="Green"
+                        TextWrapping="Wrap" Foreground="Black" 
+                        HorizontalAlignment="Center" VerticalContentAlignment="Top" Width="540" Height="32" MaxLines="10"/>
+                    </Border>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Vertical">
+                    <TextBlock Text="Email" Foreground="White" FontSize="20" FontWeight="Medium" FontFamily="Inter" Margin="0 25 0 5"/>
+                    <Border CornerRadius="3" BorderThickness="0.5" Background="White" BorderBrush="Black" Height="32" Width="550">
+                        <TextBox x:Name="EmailTB" materialDesign:HintAssist.Background="Transparent"  materialDesign:HintAssist.Hint="sample@gmail.com"
+                        materialDesign:HintAssist.Foreground="Black" 
+                        materialDesign:TextFieldAssist.DecorationVisibility="Hidden" CaretBrush="Green"
+                        TextWrapping="Wrap" Foreground="Black" 
+                        HorizontalAlignment="Center" VerticalContentAlignment="Top" Width="540" Height="32" MaxLines="10"/>
+                    </Border>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Vertical">
+                    <TextBlock Text="Password" Foreground="White" FontSize="20" FontWeight="Medium" FontFamily="Inter" Margin="0 25 0 5"/>
+                    <Border CornerRadius="3" BorderThickness="0.5" Background="White" BorderBrush="Black" Height="32" Width="550">
+                        <TextBox x:Name="PasswordTB" materialDesign:HintAssist.Background="Transparent"  materialDesign:HintAssist.Hint="Password"
+                        materialDesign:HintAssist.Foreground="Black" 
+                        materialDesign:TextFieldAssist.DecorationVisibility="Hidden" CaretBrush="Green"
+                        TextWrapping="Wrap" Foreground="Black" 
+                        HorizontalAlignment="Center" VerticalContentAlignment="Top" Width="540" Height="32" MaxLines="10"/>
+                    </Border>
+                </WrapPanel>
+
+                <StackPanel Margin="0 100 0 0" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="EditBTN" materialDesign:ButtonAssist.CornerRadius="6" materialDesign:ElevationAssist.Elevation="Dp0" Width="150" Height="40" Background="#4A90E2" BorderBrush="#4A90E2" Margin="0 0 20 0" Click="addTransactionBTN_Click">
+                        <WrapPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="AccountEdit" VerticalAlignment="Center" Margin="0 0 5 0" Foreground="White">
+                                <materialDesign:PackIcon.Effect>
+                                    <DropShadowEffect ShadowDepth="0" Direction="0" Color="White" Opacity="0.6" BlurRadius="3"/>
+                                </materialDesign:PackIcon.Effect>
+                            </materialDesign:PackIcon>
+                            <TextBlock x:Name="addButtonTB" Foreground="White">Edit</TextBlock>
+                        </WrapPanel>
+                    </Button>
+
+                    <Button x:Name="DeleteBTN" materialDesign:ButtonAssist.CornerRadius="6" materialDesign:ElevationAssist.Elevation="Dp0" Width="150" Height="40" Background="DarkRed" BorderBrush="DarkRed" IsEnabled="False" Click="deleteTransactionBTN_Click">
+                        <WrapPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Trash" VerticalAlignment="Center" Margin="0 0 5 0" Foreground="White">
+                                <materialDesign:PackIcon.Effect>
+                                    <DropShadowEffect ShadowDepth="0" Direction="0" Color="White" Opacity="0.6" BlurRadius="3"/>
+                                </materialDesign:PackIcon.Effect>
+                            </materialDesign:PackIcon>
+                            <TextBlock Foreground="White">Delete</TextBlock>
+                        </WrapPanel>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel x:Name="GeneralView" Grid.Column="1" Grid.Row="1" Margin="25" Visibility="Visible">
+                <TextBlock Text="General" Foreground="White" FontSize="30" FontWeight="Medium" FontFamily="Inter" Margin="0 0 0 0"/>
+                <WrapPanel Orientation="Horizontal" Margin="0 8 0 0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Border BorderThickness="0 0.5 0 0" BorderBrush="LightGray" Width="550" HorizontalAlignment="Center"/>
+                </WrapPanel>
+
+                <TextBlock Text="Wallet View" Foreground="White" FontSize="20" FontWeight="Medium" FontFamily="Inter" Margin="0 20 0 0"/>
+                <materialDesign:Card Background="#131a22" Grid.Row="1" Grid.Column="1" UniformCornerRadius="8" Width="550" Margin="0 5 0 0" Height="100" VerticalAlignment="Top" HorizontalAlignment="Left">
+                    <WrapPanel Orientation="Horizontal">
+                        <Border Height="100" Width="120" HorizontalAlignment="Left" Background="#171f27" CornerRadius="8 0 0 8">
+                            <materialDesign:PackIcon x:Name="CurrencyIcon" Kind="CurrencyUsd" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 0" Foreground="Green" Width="55" Height="55"/>
+                        </Border>
+                        <StackPanel Width="200" VerticalAlignment="Center" Margin="0 15 0 0">
+                            <Label Content="Current Amount" FontFamily="Montserrat" FontWeight="Medium" Foreground="White" Margin="8 -20 0 0" FontSize="15"/>
+                            <TextBlock x:Name="BalanceTB" Text="$0" FontFamily="Montserrat" FontWeight="Heavy" Foreground="White" Margin="10 0 0 0" FontSize="38"/>
+                        </StackPanel>
+                    </WrapPanel>
+                </materialDesign:Card>
+
+                <StackPanel Orientation="Horizontal">
+                    <WrapPanel Orientation="Vertical" Margin="0 0 30 0">
+                        <TextBlock Text="Wallet Amount" Foreground="White" FontSize="20" FontWeight="Medium" FontFamily="Inter" Margin="0 20 0 5"/>
+                        <Border CornerRadius="3" BorderThickness="0.5" Background="White" BorderBrush="Black" Height="32" Width="250">
+                            <WrapPanel Orientation="Horizontal">
+                                <TextBox x:Name="WalletAmountTB" materialDesign:HintAssist.Background="Transparent" Text="0" materialDesign:HintAssist.Foreground="Black" Margin="5 0 -5 0"
+                                materialDesign:TextFieldAssist.DecorationVisibility="Hidden" CaretBrush="Green" TextWrapping="Wrap" Foreground="Black"  HorizontalAlignment="Center" VerticalContentAlignment="Top" Width="149" Height="32" MaxLines="10" FontSize="15"/>
+                                <Button x:Name="NumUpBTN" Width="50" Height="30" materialDesign:ButtonAssist.CornerRadius="0" Background="#12171d" BorderBrush="Gray" VerticalAlignment="Center" Click="NumUpBTN_Click">
+                                    <materialDesign:PackIcon Kind="ChevronUp" VerticalAlignment="Center" Margin="0 0 5 0" Foreground="White"></materialDesign:PackIcon>
+                                </Button>
+                                <Button x:Name="NumDownBTN" Width="50" Height="30" materialDesign:ButtonAssist.CornerRadius="0" Background="#12171d" BorderBrush="Gray" VerticalAlignment="Center" Click="NumDownBTN_Click">
+                                    <materialDesign:PackIcon Kind="ChevronDown" VerticalAlignment="Center" Margin="0 0 5 0" Foreground="White"></materialDesign:PackIcon>
+                                </Button>
+
+                            </WrapPanel>
+                        </Border>
+                    </WrapPanel>
+
+
+                    <WrapPanel Orientation="Vertical">
+                        <TextBlock Text="Wallet Currency" Foreground="White" FontSize="20" FontWeight="Medium" FontFamily="Inter" Margin="0 20 0 5"/>
+                        <Border CornerRadius="3" BorderThickness="0.5" Background="White" BorderBrush="Black" Height="32" Width="260">
+                            <ComboBox x:Name="CurrencyCB" Margin="3" materialDesign:TextFieldAssist.UnderlineBrush="#131a22" materialDesign:HintAssist.Hint="Select Item" Foreground="Black" IsEditable="False"/>
+                        </Border>
+                    </WrapPanel>
+
+
+                </StackPanel>
+
+                <Button x:Name="EditWalletBTN" Margin="0 100 0 0" materialDesign:ButtonAssist.CornerRadius="6" materialDesign:ElevationAssist.Elevation="Dp0" Width="150" Height="40" Background="#4A90E2" BorderBrush="#4A90E2" Click="EditWalletBTN_Click">
+                    <WrapPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="AccountEdit" VerticalAlignment="Center" Margin="0 0 5 0" Foreground="White">
+                            <materialDesign:PackIcon.Effect>
+                                <DropShadowEffect ShadowDepth="0" Direction="0" Color="White" Opacity="0.6" BlurRadius="3"/>
+                            </materialDesign:PackIcon.Effect>
+                        </materialDesign:PackIcon>
+                        <TextBlock Foreground="White">Edit</TextBlock>
+                    </WrapPanel>
+                </Button>
+
+            </StackPanel>
 
         </Grid>
     </Border>
