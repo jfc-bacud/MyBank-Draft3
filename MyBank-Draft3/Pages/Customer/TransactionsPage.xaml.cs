@@ -255,11 +255,14 @@ namespace MyBank_Draft3.Pages.Customer
                     break;
 
                 case 6:
-                    MessageBox.Show("Amount field is in the wrong format!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    datePicker.Focus();
+                    MessageBox.Show("Amount field cannot be empty!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    AmountTB.Focus();
                     break;
 
                 case 7:
+                    MessageBox.Show("Amount needs to be a number!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    AmountTB.Focus();
+                    break;
 
             }
         }
@@ -337,14 +340,23 @@ namespace MyBank_Draft3.Pages.Customer
 
         private void deleteTransactionBTN_Click(object sender, RoutedEventArgs e)
         {
-            var selectedTransaction = (dynamic)ListViewData.SelectedItem;
-            string _localTransaction = selectedTransaction.ID;
+            var result = MessageBox.Show($"Are you sure you want to delete this transaction?\n\nThis action cannot be undone.",
+                                          "Confirm Delete",
+                                          MessageBoxButton.YesNo,
+                                          MessageBoxImage.Warning);
 
-            var transactionToDelete = _localdb.db.Transactions.SingleOrDefault(t => t.Transaction_ID == _localTransaction);
-            _localdb.db.Transactions.DeleteOnSubmit(transactionToDelete);
-            ChangeWalletDelete();
-            SubmitChanges();
-            ClearTrigger();
+            if (result == MessageBoxResult.Yes)
+            {
+
+                var selectedTransaction = (dynamic)ListViewData.SelectedItem;
+                string _localTransaction = selectedTransaction.ID;
+
+                var transactionToDelete = _localdb.db.Transactions.SingleOrDefault(t => t.Transaction_ID == _localTransaction);
+                _localdb.db.Transactions.DeleteOnSubmit(transactionToDelete);
+                ChangeWalletDelete();
+                SubmitChanges();
+                ClearTrigger();
+            }
         }
 
         private void ChangeWallet(out bool valid)

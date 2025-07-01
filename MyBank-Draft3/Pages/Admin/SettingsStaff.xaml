@@ -29,7 +29,7 @@
 
                 </WrapPanel>
 
-                <Button x:Name="AccountBTN" materialDesign:ButtonAssist.CornerRadius="6" Width="250" Height="35" Background="White" BorderBrush="White" Margin="0 25 0 0" Click="AccountBTN_Click">
+                <Button x:Name="AccountBTN" materialDesign:ButtonAssist.CornerRadius="6" Width="250" Height="35" Background="White" BorderBrush="White" Margin="0 25 0 0">
                     <WrapPanel Orientation="Horizontal">
                         <materialDesign:PackIcon x:Name="AccountIcon" Kind="People" VerticalAlignment="Center" Margin="0 0 5 0" Foreground="Black">
                         </materialDesign:PackIcon>
