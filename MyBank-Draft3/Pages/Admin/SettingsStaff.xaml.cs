@@ -54,16 +54,53 @@ namespace MyBank_Draft3.Pages.Admin
 
         private void EditBTN_Click(object sender, RoutedEventArgs e)
         {
-            var customerToEdit = (from c in _localdb.db.Customers
-                                  where c.Customer_ID == localUID
-                                  select c).FirstOrDefault();
+            if (VerifyFields())
+            {
+                var customerToEdit = (from c in _localdb.db.Customers
+                                      where c.Customer_ID == localUID
+                                      select c).FirstOrDefault();
 
-            customerToEdit.Customer_FirstName = FirstTB.Text;
-            customerToEdit.Customer_LastName = LastTB.Text;
-            customerToEdit.Customer_Email = EmailTB.Text;
-            customerToEdit.Customer_Password = PasswordTB.Text;
+                customerToEdit.Customer_FirstName = FirstTB.Text;
+                customerToEdit.Customer_LastName = LastTB.Text;
+                customerToEdit.Customer_Email = EmailTB.Text;
+                customerToEdit.Customer_Password = PasswordTB.Text;
 
-            SubmitChanges();
+                MessageBox.Show("Your changes have been saved successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                SubmitChanges();
+            }
+        }
+
+        private bool VerifyFields()
+        {
+            if (string.IsNullOrWhiteSpace(FirstTB.Text))
+            {
+                MessageBox.Show("First name field cannot be empty!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                FirstTB.Focus();
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(LastTB.Text))
+            {
+                MessageBox.Show("Last name field cannot be empty!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                LastTB.Focus();
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(EmailTB.Text))
+            {
+                MessageBox.Show("Email field cannot be empty!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                EmailTB.Focus();
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(PasswordTB.Text))
+            {
+                MessageBox.Show("Password field cannot be empty!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                PasswordTB.Focus();
+                return false;
+            }
+
+            return true;
         }
 
         private void SubmitChanges()
@@ -75,22 +112,30 @@ namespace MyBank_Draft3.Pages.Admin
 
         private void DeleteBTN_Click(object sender, RoutedEventArgs e)
         {
-            var values = (from a in _localdb.db.Admins
-                          where a.User_ID == localUID
-                          select new
-                          {
-                              a.Admin_ID,
-                              a.User_ID
-                          }).FirstOrDefault();
+            var result = MessageBox.Show($"Are you sure you want to delete your account?\n\nThis action cannot be undone.",
+                                         "Confirm Delete",
+                                         MessageBoxButton.YesNo,
+                                         MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                var values = (from a in _localdb.db.Admins
+                              where a.User_ID == localUID
+                              select new
+                              {
+                                  a.Admin_ID,
+                                  a.User_ID
+                              }).FirstOrDefault();
 
 
-            var staffToDelete = _localdb.db.Admins.SingleOrDefault(t => t.Admin_ID == values.Admin_ID);
-            var userToDelete = _localdb.db.Users.SingleOrDefault(t => t.User_ID == values.User_ID);
-            
+                var staffToDelete = _localdb.db.Admins.SingleOrDefault(t => t.Admin_ID == values.Admin_ID);
+                var userToDelete = _localdb.db.Users.SingleOrDefault(t => t.User_ID == values.User_ID);
 
-            _localdb.db.Admins.DeleteOnSubmit(staffToDelete);
-            _localdb.db.Users.DeleteOnSubmit(userToDelete);
-            DeleteAccount();
+
+                _localdb.db.Admins.DeleteOnSubmit(staffToDelete);
+                _localdb.db.Users.DeleteOnSubmit(userToDelete);
+                DeleteAccount();
+            }       
         }
 
         private void DeleteAccount()
@@ -100,7 +145,6 @@ namespace MyBank_Draft3.Pages.Admin
             mainWindow.Show();
             Window.GetWindow(this).Close();
         }
-
 
     }
 }

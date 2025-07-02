@@ -1386,7 +1386,7 @@ namespace MyBank_Draft3.Classes
 		
 		private int _UserWallet_ID;
 		
-		private decimal _UserWallet_Balance;
+		private System.Nullable<decimal> _UserWallet_Balance;
 		
 		private string _UserWallet_Currency;
 		
@@ -1398,7 +1398,7 @@ namespace MyBank_Draft3.Classes
     partial void OnCreated();
     partial void OnUserWallet_IDChanging(int value);
     partial void OnUserWallet_IDChanged();
-    partial void OnUserWallet_BalanceChanging(decimal value);
+    partial void OnUserWallet_BalanceChanging(System.Nullable<decimal> value);
     partial void OnUserWallet_BalanceChanged();
     partial void OnUserWallet_CurrencyChanging(string value);
     partial void OnUserWallet_CurrencyChanged();
@@ -1430,8 +1430,8 @@ namespace MyBank_Draft3.Classes
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserWallet_Balance", DbType="Decimal(10,2) NOT NULL")]
-		public decimal UserWallet_Balance
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserWallet_Balance", DbType="Decimal(10,2)")]
+		public System.Nullable<decimal> UserWallet_Balance
 		{
 			get
 			{

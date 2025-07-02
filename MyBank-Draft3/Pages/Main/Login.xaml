@@ -31,20 +31,29 @@
 
             <StackPanel Grid.Row="2" Grid.Column="3" Orientation="Vertical" HorizontalAlignment="Center" Width="325" Margin="5" Height="275">
 
-                <Label Content="Username" Foreground="White" FontSize="12" FontWeight="Medium" FontFamily="Montserrat" Margin="0,0,0,5"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Username" Foreground="White" FontSize="12" FontWeight="Medium" FontFamily="Montserrat" Margin="0,0,0,5"/>
+                    <Label x:Name="ErrorUser" Content="*Placeholder" Foreground="Red" FontSize="12" FontWeight="Medium" FontFamily="Montserrat" Margin="0,0,0,5" Visibility="Hidden"
+                           FontStyle="Italic"/>
+                </StackPanel>
+                
                 <TextBox x:Name="userIN"
                   FontSize="14" Foreground="White"
                   materialDesign:TextFieldAssist.UnderlineBrush="Green" FontFamily="Montserrat"
-                  Width="315" CaretBrush="Green"/>
+                  Width="315" CaretBrush="Green" BorderBrush="Black" TextChanged="userIN_TextChanged"/>
 
-                <Label Content="Password" Foreground="White" FontSize="12" FontWeight="Medium" FontFamily="Montserrat" Margin="0,15,0,5"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Password" Foreground="White" FontSize="12" FontWeight="Medium" FontFamily="Montserrat" Margin="0,15,0,5"/>
+                    <Label x:Name="PassError" Content="*Placeholder" Foreground="Red" FontSize="12" FontWeight="Medium" FontFamily="Montserrat" Margin="0,15,0,5" Visibility="Hidden"
+                           FontStyle="Italic"/>
+                </StackPanel>
                 <PasswordBox x:Name="passIN" FontSize="14" Foreground="White"
-                       materialDesign:TextFieldAssist.UnderlineBrush="Green" 
-                      Width="315" CaretBrush="Green"/>
+                       materialDesign:TextFieldAssist.UnderlineBrush="Green"
+                      Width="315" CaretBrush="Green" PasswordChanged="passIN_PasswordChanged"/>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,25,0,0">
-                    <Button x:Name="loginBTN" Content="Log In" Width="100" Height="30" Margin="5" Click="loginBTN_Click" Foreground="Black" BorderBrush="Black" Background="White"/>
-                    <Button x:Name="newBTN" Content="New User" Width="100" Height="30" Margin="5" Foreground="Black" BorderBrush="Black" Background="White" Click="newBTN_Click"/>
+                    <Button x:Name="loginBTN" Content="Log In" Width="100" Height="30" Margin="5" Click="loginBTN_Click" Foreground="White" BorderBrush="Black" Background="DarkGreen" MouseEnter="OnHover" MouseLeave="OnLeave"/>
+                    <Button x:Name="newBTN" Content="New User" Width="100" Height="30" Margin="5" Foreground="White" BorderBrush="Black" Background="DarkGreen" Click="newBTN_Click" MouseEnter="OnHover" MouseLeave="OnLeave"/>
                 </StackPanel>
             </StackPanel>
         </Grid>

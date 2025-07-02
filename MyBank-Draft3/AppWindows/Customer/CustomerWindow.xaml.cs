@@ -1,4 +1,5 @@
-﻿using MyBank_Draft3.Classes;
+﻿using MyBank_Draft3.AppWindows.Main;
+using MyBank_Draft3.Classes;
 using MyBank_Draft3.Pages.Customer;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,14 @@ namespace MyBank_Draft3.AppWindows.Customer
             InitializeComponent();
             RetrieveUser(userEmail);
             ViewHome();
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
         }
 
         public void ViewHome()
@@ -99,6 +108,21 @@ namespace MyBank_Draft3.AppWindows.Customer
             settingsPage = new SettingsPage(localUser);
             windowFrame.Content = settingsPage;
             SelectedBTNColor(sender as Button);
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show($"Are you sure you want to log out?",
+                                          "Confirm Exit",
+                                          MessageBoxButton.YesNo,
+                                          MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
+                this.Close();
+            }
         }
     }
 }

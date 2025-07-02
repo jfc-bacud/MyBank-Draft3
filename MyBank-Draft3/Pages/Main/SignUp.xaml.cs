@@ -1,4 +1,7 @@
-﻿using MyBank_Draft3.Classes;
+﻿using Microsoft.Xaml.Behaviors.Core;
+using MyBank_Draft3.AppWindows.Customer;
+using MyBank_Draft3.AppWindows.Main;
+using MyBank_Draft3.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,19 +35,61 @@ namespace MyBank_Draft3.Pages.Main
         void LoadDatabase()
         {
             _localdb = new Database();
+            PopulateCurrencyCB();
         }
+
+        void PopulateCurrencyCB()
+        {
+            List<string> strings = new List<string> { "USD", "EUR", "PHP", "JPY", "KRW", "GBP", "CNY" };
+            CurrencyCB.ItemsSource = strings; 
+        }
+
 
         private void Continue_Click(object sender, RoutedEventArgs e)
         {
-            if (String.IsNullOrEmpty(fnameIN.Text) || String.IsNullOrEmpty(lnameIN.Text) || String.IsNullOrEmpty(emailIN.Text) || String.IsNullOrEmpty(passIN.Text))
+            if (string.IsNullOrWhiteSpace(fnameIN.Text))
             {
+                MessageBox.Show("First name field cannot be left blank!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                fnameIN.Focus();
                 return;
             }
 
-            else
+            if (string.IsNullOrWhiteSpace(lnameIN.Text))
             {
-                AddUser();
+                MessageBox.Show("Last name field cannot be left blank!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                lnameIN.Focus();
+                return;
             }
+
+            if (string.IsNullOrWhiteSpace(emailIN.Text))
+            {
+                MessageBox.Show("Email field cannot be left blank!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                emailIN.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(passIN.Text))
+            {
+                MessageBox.Show("Password field cannot be left blank!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                passIN.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(CurrencyCB.SelectedItem.ToString()))
+            {
+                MessageBox.Show("Currency field cannot be left blank!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                CurrencyCB.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(Amount.Value.ToString()))
+            {
+                MessageBox.Show("Amount field cannot be left blank!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                CurrencyCB.Focus();
+                return;
+            }
+
+            AddUser();
         }
 
         private void AddUser()
@@ -54,9 +99,10 @@ namespace MyBank_Draft3.Pages.Main
                 var lastUID = _localdb.db.Users.OrderByDescending(u => u.User_ID).FirstOrDefault();
                 var lastCID = _localdb.db.Customers.OrderByDescending(c => c.Customer_ID).FirstOrDefault();
 
-                string newCID = "C" + (int.Parse(lastCID.Customer_ID.Substring(1))).ToString("D2");
-                string newUID = "C" + (int.Parse(lastUID.User_ID.Substring(1))).ToString("D2");
+                string newCID = "C" + (int.Parse(lastCID.Customer_ID.Substring(1)) + 1).ToString("D2") ;
+                string newUID = "U" + (int.Parse(lastUID.User_ID.Substring(1)) + 1).ToString("D2");
                 int UWID = GenerateNum();
+
 
                 var _newUser = new User
                 {
@@ -67,8 +113,8 @@ namespace MyBank_Draft3.Pages.Main
                 var _newUserWallet = new UserWallet
                 {
                     UserWallet_ID = UWID,
-                    UserWallet_Balance = 0,
-                    UserWallet_Currency = "USD"
+                    UserWallet_Balance = decimal.Parse(Amount.Value.ToString()),
+                    UserWallet_Currency = CurrencyCB.SelectedItem.ToString()
                 };
 
                 var _newCustomer = new Classes.Customer
@@ -83,9 +129,7 @@ namespace MyBank_Draft3.Pages.Main
                 };
 
                 _localdb.db.Users.InsertOnSubmit(_newUser);
-                SubmitChanges();
                 _localdb.db.UserWallets.InsertOnSubmit(_newUserWallet);
-                SubmitChanges();
                 _localdb.db.Customers.InsertOnSubmit(_newCustomer);
                 SubmitChanges();
             }
@@ -111,16 +155,25 @@ namespace MyBank_Draft3.Pages.Main
 
         private void SubmitChanges()
         {
-            try
-            {
-                _localdb.db.SubmitChanges();
-                LoadDatabase();
-            }
-            catch
-            {
-                return;
-            }
+            _localdb.db.SubmitChanges();
+            LoadDatabase();
+            MessageBox.Show("Added user successfully! Welcome to MyBank!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            Launch();
         }
 
+        private void Launch()
+        {
+            CustomerWindow customerWindow = new CustomerWindow(emailIN.Text);
+            customerWindow.Show();
+            Window.GetWindow(this).Close();
+        }
+
+        private void returnBTN_Click(object sender, RoutedEventArgs e)
+        {
+            if (Window.GetWindow(this) is MainWindow mainWindow)
+            {
+                mainWindow.NavBack();
+            }
+        }
     }
 }

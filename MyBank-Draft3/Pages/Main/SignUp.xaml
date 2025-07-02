@@ -16,38 +16,87 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="800"/>
+                <ColumnDefinition Width="700"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center">
-                <WrapPanel Orientation="Horizontal" Margin="0 20 0 40">
+            <Button x:Name="returnBTN" Grid.RowSpan="2" Grid.Column="0" materialDesign:ButtonAssist.CornerRadius="6" materialDesign:ElevationAssist.Elevation="Dp0" Width="120" Height="35" Background="#12171d" BorderBrush="#12171d" VerticalAlignment="Top"
+                    Margin="-500 50 0 0" Click="returnBTN_Click">
+                <WrapPanel Width="120">
+                    <materialDesign:PackIcon Kind="ArrowCollapseLeft" VerticalAlignment="Center" Margin="0 0 15 0" Foreground="White"/>
+                    <TextBlock Foreground="White">Return</TextBlock>
+                </WrapPanel>
+            </Button>
+
+            <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Margin="0 50 0 10">
+                <WrapPanel Orientation="Horizontal">
                     <TextBlock Text="Welcome to " FontSize="40" FontWeight="Medium" FontFamily="Inter" Foreground="White"/>
                     <TextBlock Text="MyBank!" FontSize="40" FontWeight="Medium" FontFamily="Inter" Foreground="Green"/>
                 </WrapPanel>
+                <WrapPanel Margin="0 0 0 20">
+                    <TextBlock Text="*Required Fields" Foreground="Red" FontFamily="Inter" FontStyle="Italic"/>
+                </WrapPanel>
 
-                <Label Content="First Name" Foreground="White" FontSize="15" FontWeight="Medium" FontFamily="Montserrat" Margin="0,0,0,5"/>
-                <TextBox x:Name="fnameIN"
-             FontSize="14" Foreground="White"
-             materialDesign:TextFieldAssist.UnderlineBrush="Green" FontFamily="Montserrat"
-             Width="Auto" CaretBrush="Green"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="First Name" Foreground="White" FontSize="15" FontWeight="Medium" FontFamily="Montserrat" Margin="0,0,0,5"/>
+                    <Label x:Name="firstError" Content="*" Foreground="Red" FontStyle="Italic" FontSize="15" FontWeight="Light" FontFamily="Montserrat" Margin="0,0,0,5"/>
+                </StackPanel>
+ 
+                <TextBox x:Name="fnameIN" FontSize="15" Foreground="White" materialDesign:TextFieldAssist.UnderlineBrush="Green" FontFamily="Montserrat"
+                 materialDesign:HintAssist.Hint="John (Max. 50 Characters)"  Width="385" MaxLines="50" CaretBrush="Green"/>
 
-                <Label Content="Last Name" Foreground="White" FontSize="15" FontWeight="Medium" FontFamily="Montserrat" Margin="0,15,0,5"/>
-                <TextBox x:Name="lnameIN"
-             FontSize="14" Foreground="White"
-             materialDesign:TextFieldAssist.UnderlineBrush="Green" FontFamily="Montserrat"
-             Width="Auto" CaretBrush="Green"/>
+                <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+                    <Label Content="Last Name" Foreground="White" FontSize="15" FontWeight="Medium" FontFamily="Montserrat" Margin="0,15,0,5"/>
+                    <Label x:Name="secondError" Content="*" Foreground="Red" FontStyle="Italic" FontSize="15" FontWeight="Medium" FontFamily="Montserrat" Margin="0,10,0,5"/>
+                </StackPanel>
 
-                <Label Content="Email" Foreground="White" FontSize="15" FontWeight="Medium" FontFamily="Montserrat" Margin="0,15,0,5"/>
-                <TextBox x:Name="emailIN" FontSize="14" Foreground="White" materialDesign:TextFieldAssist.UnderlineBrush="Green" FontFamily="Montserrat" Width="Auto" CaretBrush="Green"/>
+                <TextBox x:Name="lnameIN" FontSize="15" Foreground="White" materialDesign:TextFieldAssist.UnderlineBrush="Green" FontFamily="Montserrat"
+                    materialDesign:HintAssist.Hint="Maxwell (Max. 50 Characters)" Width="385" MaxLines="50" CaretBrush="Green"/>
 
-                <Label Content="Password" Foreground="White" FontSize="15" FontWeight="Medium" FontFamily="Montserrat" Margin="0,15,0,5"/>
-                <TextBox x:Name="passIN" FontSize="14" Foreground="White" materialDesign:TextFieldAssist.UnderlineBrush="Green" FontFamily="Montserrat" Width="Auto" CaretBrush="Green"/>
+                <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+                    <Label Content="Email" Foreground="White" FontSize="15" FontWeight="Medium" FontFamily="Montserrat" Margin="0,15,0,5"/>
+                    <Label x:Name="thirdError" Content="*" Foreground="Red" FontStyle="Italic" FontSize="15" FontWeight="Medium" FontFamily="Montserrat" Margin="0,10,0,5"/>
+                </StackPanel>
 
-                <Button x:Name="Continue" Content="Continue" Width="200" Height="40" Margin="0 70 0 0 " Foreground="Black" BorderBrush="Black" Background="White" Click="Continue_Click" />
+                <TextBox x:Name="emailIN" FontSize="15" Foreground="White" materialDesign:TextFieldAssist.UnderlineBrush="Green" FontFamily="Montserrat" 
+                         MaxLines="50" materialDesign:HintAssist.Hint="john.maxwell@gmail.com (Max. 50 Characters)" Width="385" CaretBrush="Green"/>
+
+                <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+                    <Label Content="Password" Foreground="White" FontSize="15" FontWeight="Medium" FontFamily="Montserrat" Margin="0,15,0,5"/>
+                    <Label x:Name="fourthError" Content="*" Foreground="Red" FontStyle="Italic" FontSize="15" FontWeight="Medium" FontFamily="Montserrat" Margin="0,10,0,5"/>
+                </StackPanel>
+
+                <TextBox x:Name="passIN" FontSize="15" Foreground="White" materialDesign:TextFieldAssist.UnderlineBrush="Green" 
+                         FontFamily="Montserrat" CaretBrush="Green"
+                         MaxLines="50" materialDesign:HintAssist.Hint="password123 (Max. 50 Characters)" Width="385"/>
+
+                <StackPanel Margin="0,20,0,5" Orientation="Horizontal">
+                    <WrapPanel Orientation="Vertical">
+                        <WrapPanel Orientation="Horizontal">
+                            <Label Content="Amount" Foreground="White" FontSize="15" FontWeight="Medium" FontFamily="Montserrat" Margin="-5 0 0 0"/>
+                            <Label x:Name="fifthError" Content="*" FontStyle="Italic" Foreground="Red" FontSize="15" FontWeight="Medium" FontFamily="Montserrat"/>
+                        </WrapPanel>
+                        <materialDesign:NumericUpDown x:Name="Amount" FontWeight="Medium" FontSize="15" FontFamily="Montserrat" Foreground="White" Width="175" Margin="0 0 40 0"/>
+                    </WrapPanel>
+
+
+                    <WrapPanel Orientation="Vertical" Margin="0 0 0 0 ">
+
+                        <WrapPanel Orientation="Horizontal">
+                            <Label Content="Currency" Foreground="White" FontSize="15" FontWeight="Medium" FontFamily="Montserrat" Margin="-5 0 0 0"/>
+                            <Label x:Name="sixthError" Content="*" FontStyle="Italic" Foreground="Red" FontSize="15" FontWeight="Medium" FontFamily="Montserrat"/>
+                        </WrapPanel>
+                       
+                        <ComboBox x:Name="CurrencyCB" FontSize="15" FontWeight="Medium" FontFamily="Montserrat"
+                                  Width="175"  Background="Green"  SelectedIndex="0" TextElement.Foreground="Black" materialDesign:HintAssist.Hint="USD"/>
+                    </WrapPanel>
+                </StackPanel>
+               
+
+                <Button x:Name="SigninBTN" Content="Sign-In" Width="200" Height="40" Margin="0 40 0 0 " Foreground="White" BorderBrush="DarkGreen" Background="DarkGreen" Click="Continue_Click" />
             </StackPanel>
 
-            <Border CornerRadius="0 20 20 0" Height="Auto" Margin="699,-4,-300,-158" Grid.RowSpan="2" Grid.ColumnSpan="2" >
+            <Border Height="Auto" Margin="699,-4,-300,-55" Grid.RowSpan="2" Grid.ColumnSpan="2" >
                 <Border.Background>
                     <ImageBrush ImageSource = "/Assets/Pictures/green.png"/>
                 </Border.Background>

@@ -64,7 +64,7 @@
   <Table Name="dbo.UserWallet" Member="UserWallets">
     <Type Name="UserWallet">
       <Column Name="UserWallet_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="UserWallet_Balance" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="UserWallet_Balance" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
       <Column Name="UserWallet_Currency" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
       <Association Name="UserWallet_Customer" Member="Customers" ThisKey="UserWallet_ID" OtherKey="UserWallet_ID" Type="Customer" />
     </Type>

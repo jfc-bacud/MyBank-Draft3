@@ -264,6 +264,9 @@ namespace MyBank_Draft3.Pages.Customer
                     AmountTB.Focus();
                     break;
 
+                case 8:
+                    MessageBox.Show("Transaction cannot be done due to insufficient funds!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    break;
             }
         }
 
@@ -282,7 +285,7 @@ namespace MyBank_Draft3.Pages.Customer
 
         private bool FieldVerify() // FOR ERROR HANDLING LATER
         {
-            if (NameTB.Text == null)
+            if (string.IsNullOrWhiteSpace(NameTB.Text))
             {
                 ThrowError(2);
                 return false;
@@ -309,7 +312,7 @@ namespace MyBank_Draft3.Pages.Customer
                 }
             }
 
-            if (AmountTB.Text == null)
+            if (string.IsNullOrWhiteSpace(AmountTB.Text))
             {
                 ThrowError(6);
             }
@@ -320,23 +323,19 @@ namespace MyBank_Draft3.Pages.Customer
                     ThrowError(7);
                     return false;
                 }
+                else
+                {
+                    if (result < 0)
+                    {
+                        ThrowError(8);
+                        return false;
+                    }
+                }
             }
 
             return true;
         }
 
-        private bool VerifyAmount()
-        {
-            if (decimal.TryParse(AmountTB.Text.ToString(), out decimal amount))
-            {
-                if (amount >=0)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        } // FOR ERROR HANDLING
 
         private void deleteTransactionBTN_Click(object sender, RoutedEventArgs e)
         {
@@ -353,6 +352,8 @@ namespace MyBank_Draft3.Pages.Customer
 
                 var transactionToDelete = _localdb.db.Transactions.SingleOrDefault(t => t.Transaction_ID == _localTransaction);
                 _localdb.db.Transactions.DeleteOnSubmit(transactionToDelete);
+
+                MessageBox.Show("Transaction deleted successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 ChangeWalletDelete();
                 SubmitChanges();
                 ClearTrigger();

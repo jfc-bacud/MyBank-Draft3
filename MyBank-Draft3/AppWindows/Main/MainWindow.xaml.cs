@@ -49,5 +49,10 @@ namespace MyBank_Draft3.AppWindows.Main
             StartupFrame.Content = newUser;
         }
 
+        public void NavBack()
+        {
+            LoadLogin();
+        }
+
     }
 }

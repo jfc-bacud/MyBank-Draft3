@@ -39,9 +39,15 @@ namespace MyBank_Draft3.Pages.Main
         }
         private void loginBTN_Click(object sender, RoutedEventArgs e)
         {
-            if (String.IsNullOrEmpty(userIN.Text) || String.IsNullOrEmpty(passIN.Password))
+            if (String.IsNullOrEmpty(userIN.Text))
             {
-                MessageBox.Show("Error 1");
+                ThrowError(1);
+                return;
+            }
+
+            if (String.IsNullOrEmpty(passIN.Password))
+            {
+                ThrowError(2);
                 return;
             }
 
@@ -51,8 +57,45 @@ namespace MyBank_Draft3.Pages.Main
                 {
                     OpenWindow(role);
                 }
+                else
+                {
+                    ThrowError(4);
+                    return;
+                }
+            }
+            else
+            {
+                ThrowError(3);
+                return;
             }
         }
+
+        private void ThrowError(int error)
+        {
+            switch (error)
+            {
+                case 1:
+                    ErrorUser.Content = "*User field is required";
+                    ErrorUser.Visibility = Visibility.Visible;
+                    break;
+
+                case 2:
+                    ErrorUser.Content = "*Password field is required";
+                    ErrorUser.Visibility = Visibility.Visible;
+                    break;
+
+                case 3:
+                    ErrorUser.Content = "*Invalid username";
+                    ErrorUser.Visibility = Visibility.Visible;
+                    break;
+
+                case 4:
+                    ErrorUser.Content = "*Incorrect password";
+                    ErrorUser.Visibility = Visibility.Visible;
+                    break;
+            }
+        }
+
         private bool UserExists(out string role)
         {
             var possibleCustomer = (from c in db.GetCustomer()
@@ -129,5 +172,32 @@ namespace MyBank_Draft3.Pages.Main
             }
         }
 
+        private void OnHover(object sender, MouseEventArgs e)
+        {
+            var ButtonOn = sender as Button;
+
+            ButtonOn.Background = new SolidColorBrush(Colors.Green);
+            ButtonOn.Foreground = new SolidColorBrush(Colors.White);
+        }
+
+        private void OnLeave(object sender, MouseEventArgs e)
+        {
+            var ButtonOn = sender as Button;
+
+            ButtonOn.Background = new SolidColorBrush(Colors.DarkGreen);
+            ButtonOn.Foreground = new SolidColorBrush(Colors.White);
+        }
+
+        private void userIN_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ErrorUser.Visibility = Visibility.Hidden;
+            PassError.Visibility = Visibility.Hidden;
+        }
+
+        private void passIN_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            ErrorUser.Visibility = Visibility.Hidden;
+            PassError.Visibility = Visibility.Hidden;
+        }
     }
 }

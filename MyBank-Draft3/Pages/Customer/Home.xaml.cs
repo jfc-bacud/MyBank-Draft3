@@ -168,7 +168,14 @@ namespace MyBank_Draft3.Pages.Customer
                                 TotalAmount = g.Sum(t => t.Amount)
                             };
 
-            expenseTB.Text = currencyUsed + _expenses.Sum(e => e.TotalAmount).ToString();
+            if (_expenses.Any())
+            {
+                expenseTB.Text = currencyUsed + _expenses.Sum(e => e.TotalAmount).ToString();
+            }
+            else
+            {
+                expenseTB.Text = currencyUsed + "0";
+            }
         }
 
         void RetrieveIncome()
@@ -184,7 +191,16 @@ namespace MyBank_Draft3.Pages.Customer
                               TotalAmount = g.Sum(t => t.Amount)
                           };
 
-            incomeTB.Text = currencyUsed + _income.Sum(e => e.TotalAmount).ToString();
+            if(_income.Any())
+            {
+                incomeTB.Text = currencyUsed + _income.Sum(e => e.TotalAmount).ToString();
+     
+            }
+            else
+            {
+                incomeTB.Text = currencyUsed + "0";
+            }
+                
         }
 
         void RetrieveCurrency(UserWallet wallet)
